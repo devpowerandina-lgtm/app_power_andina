@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, SafeAreaView, KeyboardAvoidingView, Platform, ScrollView, Alert } from 'react-native';
+import { View, Text, TouchableOpacity, Alert } from 'react-native';
+import { Mail, Lock, ShieldCheck } from 'lucide-react-native';
 import { AuthInput } from '../components/AuthInput';
 import { AuthButton } from '../components/AuthButton';
+import { AuthScreenWrapper } from '../components/AuthScreenWrapper';
+import { PowerAndinaLogo } from '../components/PowerAndinaLogo';
 import { AuthService } from '../services/AuthService';
-import { UserPlus } from 'lucide-react-native';
 
 interface RegisterScreenProps {
   onNavigateToLogin: () => void;
@@ -22,7 +24,7 @@ export const RegisterScreen = ({ onNavigateToLogin, onRegisterSuccess }: Registe
     if (!email.includes('@')) newErrors.email = 'Email inválido';
     if (password.length < 6) newErrors.password = 'Mínimo 6 caracteres';
     if (password !== confirmPassword) newErrors.confirm = 'Las contraseñas no coinciden';
-    
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -44,62 +46,95 @@ export const RegisterScreen = ({ onNavigateToLogin, onRegisterSuccess }: Registe
   };
 
   return (
-    <SafeAreaView className="flex-1 bg-light">
-      <KeyboardAvoidingView
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-        className="flex-1"
-      >
-        <ScrollView contentContainerStyle={{ flexGrow: 1 }} className="px-6 py-12">
-          <View className="items-center mb-10">
-            <View className="w-20 h-20 bg-primary-600 rounded-3xl items-center justify-center shadow-lg mb-4">
-              <UserPlus color="white" size={40} />
-            </View>
-            <Text className="text-3xl font-bold text-dark">Crear Cuenta</Text>
-            <Text className="text-gray-500 mt-2">Únete a Power Andina SAS</Text>
-          </View>
+    <AuthScreenWrapper>
+      <View style={{ flex: 1, paddingHorizontal: 28, justifyContent: 'center' }}>
+        {/* Logo (más pequeño que en Login) */}
+        <View style={{ alignItems: 'center', marginBottom: 32 }}>
+          <PowerAndinaLogo width={140} height={180} />
+        </View>
 
-          <View className="space-y-2">
-            <AuthInput
-              label="Correo Electrónico"
-              placeholder="ejemplo@correo.com"
-              value={email}
-              onChangeText={setEmail}
-              error={errors.email}
-            />
-            <AuthInput
-              label="Contraseña"
-              placeholder="Mínimo 6 caracteres"
-              value={password}
-              onChangeText={setPassword}
-              secureTextEntry
-              error={errors.password}
-            />
-            <AuthInput
-              label="Confirmar Contraseña"
-              placeholder="Repite tu contraseña"
-              value={confirmPassword}
-              onChangeText={setConfirmPassword}
-              secureTextEntry
-              error={errors.confirm}
-            />
-            
-            <View className="mt-4">
-              <AuthButton
-                title="Registrarse"
-                onPress={handleRegister}
-                loading={loading}
-              />
-            </View>
-          </View>
+        {/* Título */}
+        <Text
+          style={{
+            color: '#FFFFFF',
+            fontSize: 24,
+            fontWeight: '700',
+            textAlign: 'center',
+            marginBottom: 8,
+          }}
+        >
+          Crear Cuenta
+        </Text>
+        <Text
+          style={{
+            color: 'rgba(255, 255, 255, 0.5)',
+            fontSize: 14,
+            textAlign: 'center',
+            marginBottom: 28,
+          }}
+        >
+          Únete a Power Andina SAS
+        </Text>
 
-          <View className="flex-row justify-center mt-10">
-            <Text className="text-gray-600">¿Ya tienes una cuenta? </Text>
-            <TouchableOpacity onPress={onNavigateToLogin}>
-              <Text className="text-primary-600 font-bold">Inicia Sesión</Text>
-            </TouchableOpacity>
+        {/* Form */}
+        <View>
+          <AuthInput
+            placeholder="Correo electrónico"
+            value={email}
+            onChangeText={setEmail}
+            keyboardType="email-address"
+            autoCapitalize="none"
+            icon={<Mail color="white" size={20} />}
+            error={errors.email}
+          />
+
+          <AuthInput
+            placeholder="Contraseña (mín. 6 caracteres)"
+            value={password}
+            onChangeText={setPassword}
+            secureTextEntry
+            icon={<Lock color="white" size={20} />}
+            error={errors.password}
+          />
+
+          <AuthInput
+            placeholder="Confirmar contraseña"
+            value={confirmPassword}
+            onChangeText={setConfirmPassword}
+            secureTextEntry
+            icon={<ShieldCheck color="white" size={20} />}
+            error={errors.confirm}
+          />
+
+          {/* Register Button */}
+          <View style={{ marginTop: 8 }}>
+            <AuthButton
+              title="Registrarse"
+              onPress={handleRegister}
+              loading={loading}
+            />
           </View>
-        </ScrollView>
-      </KeyboardAvoidingView>
-    </SafeAreaView>
+        </View>
+
+        {/* Footer */}
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'center',
+            marginTop: 32,
+            paddingBottom: 24,
+          }}
+        >
+          <Text style={{ color: 'rgba(255, 255, 255, 0.6)', fontSize: 14 }}>
+            ¿Ya tienes una cuenta?{' '}
+          </Text>
+          <TouchableOpacity onPress={onNavigateToLogin}>
+            <Text style={{ color: '#FFFFFF', fontWeight: '700', fontSize: 14 }}>
+              Inicia Sesión
+            </Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    </AuthScreenWrapper>
   );
 };
