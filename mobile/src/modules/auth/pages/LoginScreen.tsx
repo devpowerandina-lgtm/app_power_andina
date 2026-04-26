@@ -32,7 +32,12 @@ export const LoginScreen = ({ onNavigateToRegister, onLoginSuccess }: LoginScree
     if (result.success) {
       onLoginSuccess();
     } else {
-      setErrorMessage(result.error || 'Correo o contraseña incorrectos');
+      const errorStr = result.error || '';
+      if (errorStr.includes('Invalid login credentials') || errorStr.includes('invalid_credentials')) {
+        setErrorMessage('El correo o la contraseña son incorrectos. Por favor, verifica tus datos.');
+      } else {
+        setErrorMessage('Ocurrió un error al iniciar sesión. Intenta de nuevo.');
+      }
     }
   };
 
