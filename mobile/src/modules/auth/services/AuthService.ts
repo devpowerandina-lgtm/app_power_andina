@@ -55,3 +55,17 @@ export const signOut = async (): Promise<AuthResponse> => {
   }
 };
 
+export const resetPassword = async (email: string): Promise<AuthResponse> => {
+  try {
+    const { error } = await supabase.auth.resetPasswordForEmail(email);
+
+    if (error) {
+      return { success: false, error: error.message };
+    }
+
+    return { success: true };
+  } catch (err: any) {
+    return { success: false, error: err.message || 'Ocurrió un error inesperado' };
+  }
+};
+

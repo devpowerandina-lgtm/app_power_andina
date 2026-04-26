@@ -4,7 +4,7 @@ import { Mail, Lock, AlertCircle } from 'lucide-react-native';
 import { AuthInput } from '../components/AuthInput';
 import { AuthButton } from '../components/AuthButton';
 import { AuthScreenWrapper } from '../components/AuthScreenWrapper';
-import { signInWithEmail } from '../services/AuthService';
+import { signInWithEmail, resetPassword } from '../services/AuthService';
 
 interface LoginScreenProps {
   onNavigateToRegister: () => void;
@@ -45,6 +45,26 @@ export const LoginScreen = ({ onNavigateToRegister, onLoginSuccess }: LoginScree
     setGoogleLoading(true);
     console.log('Google Login clicked');
     setGoogleLoading(false);
+  };
+
+  const handleForgotPassword = async () => {
+    setErrorMessage(null);
+
+    if (!email) {
+      setErrorMessage("Por favor, ingresa tu correo electrónico arriba para recuperar tu contraseña.");
+      return;
+    }
+
+    const result = await resetPassword(email);
+
+    if (result.success) {
+      Alert.alert(
+        "Correo Enviado",
+        "Hemos enviado un enlace a tu correo para restablecer tu contraseña. Por favor, revisa tu bandeja de entrada o la carpeta de spam."
+      );
+    } else {
+      setErrorMessage("Error al intentar enviar el correo de recuperación.");
+    }
   };
 
   return (
@@ -99,6 +119,7 @@ export const LoginScreen = ({ onNavigateToRegister, onLoginSuccess }: LoginScree
           {/* Forgot Password */}
           <TouchableOpacity
             style={{ alignSelf: 'center', marginBottom: 24, marginTop: 4 }}
+            onPress={handleForgotPassword}
           >
             <Text
               style={{
