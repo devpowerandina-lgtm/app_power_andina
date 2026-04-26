@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, Alert } from 'react-native';
+import { View, Text, TouchableOpacity, Alert, Image } from 'react-native';
 import { Mail, Lock, ShieldCheck } from 'lucide-react-native';
 import { AuthInput } from '../components/AuthInput';
 import { AuthButton } from '../components/AuthButton';
 import { AuthScreenWrapper } from '../components/AuthScreenWrapper';
-import { PowerAndinaLogo } from '../components/PowerAndinaLogo';
 import { AuthService } from '../services/AuthService';
 
 interface RegisterScreenProps {
@@ -47,17 +46,21 @@ export const RegisterScreen = ({ onNavigateToLogin, onRegisterSuccess }: Registe
 
   return (
     <AuthScreenWrapper>
-      <View style={{ flex: 1, paddingHorizontal: 28, justifyContent: 'center' }}>
-        {/* Logo (más pequeño que en Login) */}
-        <View style={{ alignItems: 'center', marginBottom: 32 }}>
-          <PowerAndinaLogo width={140} height={180} />
+      <View style={{ flex: 1, paddingHorizontal: 28, justifyContent: 'center', paddingTop: 40 }}>
+        {/* Logo Monocromático */}
+        <View style={{ alignItems: 'center', marginBottom: 24 }}>
+          <Image
+            source={require('../../../../assets/images/logo_power.png')}
+            style={{ width: 150, height: 150, tintColor: '#FFFFFF' }}
+            resizeMode="contain"
+          />
         </View>
 
         {/* Título */}
         <Text
           style={{
             color: '#FFFFFF',
-            fontSize: 24,
+            fontSize: 28,
             fontWeight: '700',
             textAlign: 'center',
             marginBottom: 8,
@@ -67,16 +70,16 @@ export const RegisterScreen = ({ onNavigateToLogin, onRegisterSuccess }: Registe
         </Text>
         <Text
           style={{
-            color: 'rgba(255, 255, 255, 0.5)',
-            fontSize: 14,
+            color: 'rgba(255, 255, 255, 0.6)',
+            fontSize: 15,
             textAlign: 'center',
-            marginBottom: 28,
+            marginBottom: 32,
           }}
         >
           Únete a Power Andina SAS
         </Text>
 
-        {/* Form */}
+        {/* Formulario con Glassmorphism */}
         <View>
           <AuthInput
             placeholder="Correo electrónico"
@@ -106,8 +109,8 @@ export const RegisterScreen = ({ onNavigateToLogin, onRegisterSuccess }: Registe
             error={errors.confirm}
           />
 
-          {/* Register Button */}
-          <View style={{ marginTop: 8 }}>
+          {/* Botón de Registro */}
+          <View style={{ marginTop: 16 }}>
             <AuthButton
               title="Registrarse"
               onPress={handleRegister}
@@ -121,8 +124,8 @@ export const RegisterScreen = ({ onNavigateToLogin, onRegisterSuccess }: Registe
           style={{
             flexDirection: 'row',
             justifyContent: 'center',
-            marginTop: 32,
-            paddingBottom: 24,
+            marginTop: 36,
+            paddingBottom: 40,
           }}
         >
           <Text style={{ color: 'rgba(255, 255, 255, 0.6)', fontSize: 14 }}>
