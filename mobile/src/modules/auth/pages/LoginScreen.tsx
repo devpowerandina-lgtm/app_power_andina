@@ -4,7 +4,7 @@ import { Mail, Lock, AlertCircle } from 'lucide-react-native';
 import { AuthInput } from '../components/AuthInput';
 import { AuthButton } from '../components/AuthButton';
 import { AuthScreenWrapper } from '../components/AuthScreenWrapper';
-import { signInWithEmail, resetPassword } from '../services/AuthService';
+import { signInWithEmail, resetPassword, signInWithGoogle } from '../services/AuthService';
 
 interface LoginScreenProps {
   onNavigateToRegister: () => void;
@@ -42,9 +42,22 @@ export const LoginScreen = ({ onNavigateToRegister, onLoginSuccess }: LoginScree
   };
 
   const handleGoogleLogin = async () => {
+    setErrorMessage(null);
     setGoogleLoading(true);
-    console.log('Google Login clicked');
-    setGoogleLoading(false);
+    
+    try {
+      const result = await signInWithGoogle();
+      
+      if (result.success) {
+        onLoginSuccess();
+      } else {
+        setErrorMessage(result.error || 'Error al iniciar sesión con Google');
+      }
+    } catch (error) {
+      setErrorMessage('Ocurrió un error inesperado al conectar con Google');
+    } finally {
+      setGoogleLoading(false);
+    }
   };
 
   const handleForgotPassword = async () => {
