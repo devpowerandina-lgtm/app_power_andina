@@ -1,3 +1,4 @@
+import 'react-native-url-polyfill/auto';
 import "./src/styles/global.css";
 import React, { useState, useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
@@ -5,8 +6,9 @@ import { View, ActivityIndicator } from 'react-native';
 import { LoginScreen } from './src/modules/auth/pages/LoginScreen';
 import { RegisterScreen } from './src/modules/auth/pages/RegisterScreen';
 import { OfflineScreen } from './src/modules/auth/pages/OfflineScreen';
+import { CatalogScreen } from './src/modules/catalog/pages/CatalogScreen';
 import { useNetworkStatus } from './src/shared/hooks/useNetworkStatus';
-import { supabase } from './src/shared/infrastructure/SupabaseClient';
+import { supabase } from './src/shared/infrastructure/supabase';
 
 export default function App() {
   const { isConnected } = useNetworkStatus();
@@ -59,10 +61,7 @@ export default function App() {
       )}
 
       {currentScreen === 'home' && (
-        <View className="flex-1 items-center justify-center bg-light">
-          <ActivityIndicator size="large" color="#0284c7" />
-          {/* Dashboard implementation will go here */}
-        </View>
+        <CatalogScreen />
       )}
     </View>
   );

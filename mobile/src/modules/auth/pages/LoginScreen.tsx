@@ -4,7 +4,7 @@ import { Mail, Lock } from 'lucide-react-native';
 import { AuthInput } from '../components/AuthInput';
 import { AuthButton } from '../components/AuthButton';
 import { AuthScreenWrapper } from '../components/AuthScreenWrapper';
-import { AuthService } from '../services/AuthService';
+import { signInWithEmail } from '../services/AuthService';
 
 interface LoginScreenProps {
   onNavigateToRegister: () => void;
@@ -24,26 +24,20 @@ export const LoginScreen = ({ onNavigateToRegister, onLoginSuccess }: LoginScree
     }
 
     setLoading(true);
-    const response = await AuthService.login({ email, password });
+    const result = await signInWithEmail(email, password);
     setLoading(false);
 
-    if (response.success) {
+    if (result.success) {
       onLoginSuccess();
     } else {
-      Alert.alert('Error de Autenticación', response.error || 'Credenciales inválidas');
+      Alert.alert('Error de Inicio de Sesión', result.error || 'Correo o contraseña incorrectos');
     }
   };
 
   const handleGoogleLogin = async () => {
     setGoogleLoading(true);
-    const response = await AuthService.signInWithGoogle();
+    console.log('Google Login clicked');
     setGoogleLoading(false);
-
-    if (response.success) {
-      // OAuth flow handles session via redirect
-    } else {
-      Alert.alert('Error', response.error || 'No se pudo conectar con Google');
-    }
   };
 
   return (

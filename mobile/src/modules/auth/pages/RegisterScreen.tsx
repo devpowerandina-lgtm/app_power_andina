@@ -4,7 +4,7 @@ import { Mail, Lock, ShieldCheck } from 'lucide-react-native';
 import { AuthInput } from '../components/AuthInput';
 import { AuthButton } from '../components/AuthButton';
 import { AuthScreenWrapper } from '../components/AuthScreenWrapper';
-import { AuthService } from '../services/AuthService';
+import { signUpWithEmail } from '../services/AuthService';
 
 interface RegisterScreenProps {
   onNavigateToLogin: () => void;
@@ -32,15 +32,21 @@ export const RegisterScreen = ({ onNavigateToLogin, onRegisterSuccess }: Registe
     if (!validate()) return;
 
     setLoading(true);
-    const response = await AuthService.register({ email, password });
+    const result = await signUpWithEmail(email, password);
     setLoading(false);
 
-    if (response.success) {
-      Alert.alert('Éxito', 'Cuenta creada correctamente. ¡Bienvenido!', [
-        { text: 'OK', onPress: onRegisterSuccess }
-      ]);
+    if (result.success) {
+      if (result.data?.session) {
+        onRegisterSuccess();
+      } else {
+        Alert.alert(
+          'Registro Exitoso', 
+          'Se ha creado tu cuenta. Por favor verifica tu correo si es necesario.',
+          [{ text: 'OK', onPress: () => onNavigateToLogin() }]
+        );
+      }
     } else {
-      Alert.alert('Error', response.error || 'No se pudo crear la cuenta');
+      Alert.alert('Error de Registro', result.error || 'No se pudo crear la cuenta');
     }
   };
 
