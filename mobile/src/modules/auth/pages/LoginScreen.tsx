@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, Alert } from 'react-native';
+import { View, Text, TouchableOpacity, Alert, Image } from 'react-native';
 import { Mail, Lock } from 'lucide-react-native';
 import { AuthInput } from '../components/AuthInput';
 import { AuthButton } from '../components/AuthButton';
 import { AuthScreenWrapper } from '../components/AuthScreenWrapper';
-import { PowerAndinaLogo } from '../components/PowerAndinaLogo';
 import { AuthService } from '../services/AuthService';
 
 interface LoginScreenProps {
@@ -51,8 +50,12 @@ export const LoginScreen = ({ onNavigateToRegister, onLoginSuccess }: LoginScree
     <AuthScreenWrapper>
       <View style={{ flex: 1, paddingHorizontal: 28, justifyContent: 'center' }}>
         {/* Logo */}
-        <View style={{ alignItems: 'center', marginBottom: 40 }}>
-          <PowerAndinaLogo width={180} height={220} />
+        <View style={{ alignItems: 'center', marginBottom: 48 }}>
+          <Image
+            source={require('../../../../assets/images/logo_power.png')}
+            style={{ width: 200, height: 200, tintColor: '#FFFFFF' }}
+            resizeMode="contain"
+          />
         </View>
 
         {/* Form */}
