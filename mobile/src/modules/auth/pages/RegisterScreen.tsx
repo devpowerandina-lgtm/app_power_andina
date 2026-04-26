@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, Alert, Image } from 'react-native';
-import { Mail, Lock, ShieldCheck } from 'lucide-react-native';
+import { Mail, Lock, ShieldCheck, AlertCircle } from 'lucide-react-native';
 import { AuthInput } from '../components/AuthInput';
 import { AuthButton } from '../components/AuthButton';
 import { AuthScreenWrapper } from '../components/AuthScreenWrapper';
@@ -17,6 +17,7 @@ export const RegisterScreen = ({ onNavigateToLogin, onRegisterSuccess }: Registe
   const [confirmPassword, setConfirmPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState<{ email?: string; password?: string; confirm?: string }>({});
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const validate = () => {
     const newErrors: any = {};
@@ -29,6 +30,7 @@ export const RegisterScreen = ({ onNavigateToLogin, onRegisterSuccess }: Registe
   };
 
   const handleRegister = async () => {
+    setErrorMessage(null);
     if (!validate()) return;
 
     setLoading(true);
@@ -49,17 +51,13 @@ export const RegisterScreen = ({ onNavigateToLogin, onRegisterSuccess }: Registe
       const errorMessage = result.error || '';
       
       if (errorMessage.includes('already registered')) {
-        Alert.alert(
-          'Cuenta Existente',
-          'Este correo electrónico ya está registrado en Power Andina. Por favor, regresa a la pantalla anterior para iniciar sesión.',
-          [{ text: 'Entendido', onPress: () => onNavigateToLogin() }]
-        );
+        setErrorMessage('Este correo electrónico ya está registrado en Power Andina. Por favor, inicia sesión.');
       } else if (errorMessage.includes('at least 6 characters')) {
-        Alert.alert('Error de Registro', 'La contraseña debe tener al menos 6 caracteres.');
+        setErrorMessage('La contraseña debe tener al menos 6 caracteres.');
       } else if (errorMessage.toLowerCase().includes('network') || errorMessage.toLowerCase().includes('fetch')) {
-        Alert.alert('Error de Conexión', 'Hubo un problema de red. Verifica tu conexión e intenta de nuevo.');
+        setErrorMessage('Hubo un problema de red. Verifica tu conexión e intenta de nuevo.');
       } else {
-        Alert.alert('Error de Registro', 'Verifica tus datos y vuelve a intentarlo.');
+        setErrorMessage('Verifica tus datos y vuelve a intentarlo.');
       }
     }
   };
@@ -104,7 +102,10 @@ export const RegisterScreen = ({ onNavigateToLogin, onRegisterSuccess }: Registe
           <AuthInput
             placeholder="Correo electrónico"
             value={email}
-            onChangeText={setEmail}
+            onChangeText={(text) => {
+              setEmail(text);
+              setErrorMessage(null);
+            }}
             keyboardType="email-address"
             autoCapitalize="none"
             icon={<Mail color="white" size={20} />}
@@ -114,7 +115,10 @@ export const RegisterScreen = ({ onNavigateToLogin, onRegisterSuccess }: Registe
           <AuthInput
             placeholder="Contraseña (mín. 6 caracteres)"
             value={password}
-            onChangeText={setPassword}
+            onChangeText={(text) => {
+              setPassword(text);
+              setErrorMessage(null);
+            }}
             secureTextEntry
             icon={<Lock color="white" size={20} />}
             error={errors.password}
@@ -123,11 +127,24 @@ export const RegisterScreen = ({ onNavigateToLogin, onRegisterSuccess }: Registe
           <AuthInput
             placeholder="Confirmar contraseña"
             value={confirmPassword}
-            onChangeText={setConfirmPassword}
+            onChangeText={(text) => {
+              setConfirmPassword(text);
+              setErrorMessage(null);
+            }}
             secureTextEntry
             icon={<ShieldCheck color="white" size={20} />}
             error={errors.confirm}
           />
+
+          {/* Banner de Error */}
+          {errorMessage && (
+            <View className="bg-red-500/10 border border-red-500/30 rounded-xl p-4 mb-4 flex-row items-center justify-center">
+              <AlertCircle color="#f87171" size={20} style={{ marginRight: 8 }} />
+              <Text className="text-red-400 text-sm font-medium text-center flex-1">
+                {errorMessage}
+              </Text>
+            </View>
+          )}
 
           {/* Botón de Registro */}
           <View style={{ marginTop: 16 }}>

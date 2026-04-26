@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, Alert, Image } from 'react-native';
-import { Mail, Lock } from 'lucide-react-native';
+import { Mail, Lock, AlertCircle } from 'lucide-react-native';
 import { AuthInput } from '../components/AuthInput';
 import { AuthButton } from '../components/AuthButton';
 import { AuthScreenWrapper } from '../components/AuthScreenWrapper';
@@ -16,10 +16,12 @@ export const LoginScreen = ({ onNavigateToRegister, onLoginSuccess }: LoginScree
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [googleLoading, setGoogleLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const handleLogin = async () => {
+    setErrorMessage(null);
     if (!email || !password) {
-      Alert.alert('Error', 'Por favor completa todos los campos');
+      setErrorMessage('Por favor completa todos los campos');
       return;
     }
 
@@ -30,7 +32,7 @@ export const LoginScreen = ({ onNavigateToRegister, onLoginSuccess }: LoginScree
     if (result.success) {
       onLoginSuccess();
     } else {
-      Alert.alert('Error de Inicio de Sesión', result.error || 'Correo o contraseña incorrectos');
+      setErrorMessage(result.error || 'Correo o contraseña incorrectos');
     }
   };
 
@@ -58,7 +60,10 @@ export const LoginScreen = ({ onNavigateToRegister, onLoginSuccess }: LoginScree
           <AuthInput
             placeholder="Correo electrónico"
             value={email}
-            onChangeText={setEmail}
+            onChangeText={(text) => {
+              setEmail(text);
+              setErrorMessage(null);
+            }}
             keyboardType="email-address"
             autoCapitalize="none"
             icon={<Mail color="white" size={20} />}
@@ -68,10 +73,23 @@ export const LoginScreen = ({ onNavigateToRegister, onLoginSuccess }: LoginScree
           <AuthInput
             placeholder="Contraseña"
             value={password}
-            onChangeText={setPassword}
+            onChangeText={(text) => {
+              setPassword(text);
+              setErrorMessage(null);
+            }}
             secureTextEntry
             icon={<Lock color="white" size={20} />}
           />
+
+          {/* Banner de Error */}
+          {errorMessage && (
+            <View className="bg-red-500/10 border border-red-500/30 rounded-xl p-4 mb-4 flex-row items-center justify-center">
+              <AlertCircle color="#f87171" size={20} style={{ marginRight: 8 }} />
+              <Text className="text-red-400 text-sm font-medium text-center flex-1">
+                {errorMessage}
+              </Text>
+            </View>
+          )}
 
           {/* Forgot Password */}
           <TouchableOpacity
