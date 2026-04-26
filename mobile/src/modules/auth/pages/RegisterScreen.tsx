@@ -46,7 +46,21 @@ export const RegisterScreen = ({ onNavigateToLogin, onRegisterSuccess }: Registe
         );
       }
     } else {
-      Alert.alert('Error de Registro', result.error || 'No se pudo crear la cuenta');
+      const errorMessage = result.error || '';
+      
+      if (errorMessage.includes('already registered')) {
+        Alert.alert(
+          'Cuenta Existente',
+          'Este correo electrónico ya está registrado en Power Andina. Por favor, regresa a la pantalla anterior para iniciar sesión.',
+          [{ text: 'Entendido', onPress: () => onNavigateToLogin() }]
+        );
+      } else if (errorMessage.includes('at least 6 characters')) {
+        Alert.alert('Error de Registro', 'La contraseña debe tener al menos 6 caracteres.');
+      } else if (errorMessage.toLowerCase().includes('network') || errorMessage.toLowerCase().includes('fetch')) {
+        Alert.alert('Error de Conexión', 'Hubo un problema de red. Verifica tu conexión e intenta de nuevo.');
+      } else {
+        Alert.alert('Error de Registro', 'Verifica tus datos y vuelve a intentarlo.');
+      }
     }
   };
 
