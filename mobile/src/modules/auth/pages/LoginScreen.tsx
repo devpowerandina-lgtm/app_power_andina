@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity, SafeAreaView, KeyboardAvoidingView, Platf
 import { AuthInput } from '../components/AuthInput';
 import { AuthButton } from '../components/AuthButton';
 import { AuthService } from '../services/AuthService';
-import { LogIn, Github } from 'lucide-react-native';
+import { LogIn } from 'lucide-react-native';
 
 interface LoginScreenProps {
   onNavigateToRegister: () => void;
