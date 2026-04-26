@@ -155,6 +155,37 @@ export const catalogProducts: Product[] = [
   },
 ];
 
+export interface PromotionalBanner {
+  id: string;
+  title: string;
+  subtitle: string;
+  bgColor: string;
+}
+
+// ────────────────────────────────────────────────────────────
+// BANNERS PROMOCIONALES (Hero Banners)
+// ────────────────────────────────────────────────────────────
+export const promotionalBanners: PromotionalBanner[] = [
+  {
+    id: 'b1',
+    title: '20% en Desengrasantes',
+    subtitle: 'Limpia profundamente con Power Andina',
+    bgColor: 'bg-power-blue',
+  },
+  {
+    id: 'b2',
+    title: 'Nuevos Suavizantes',
+    subtitle: 'Fragancias que perduran por más tiempo',
+    bgColor: 'bg-power-lightGreen',
+  },
+  {
+    id: 'b3',
+    title: 'Kits de Limpieza',
+    subtitle: 'Todo lo que necesitas en un solo pack',
+    bgColor: 'bg-power-yellow',
+  },
+];
+
 // ────────────────────────────────────────────────────────────
 // Helpers
 // ────────────────────────────────────────────────────────────

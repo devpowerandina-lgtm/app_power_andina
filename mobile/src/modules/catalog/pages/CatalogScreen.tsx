@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useRef, useEffect } from 'react';
 import {
   View,
   Text,
@@ -18,13 +18,17 @@ import {
   categories,
   featuredProducts,
   catalogProducts,
+  promotionalBanners,
   formatPrice,
   Product,
   Category,
+  PromotionalBanner,
 } from '../services/ProductService';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 const CARD_WIDTH = (SCREEN_WIDTH - 32) / 2; // 2 columnas con padding lateral
+const ITEM_WIDTH = SCREEN_WIDTH * 0.85;
+const MARGIN = 8; // Correspondiente a mx-2
 
 // ────────────────────────────────────────────────────────────
 // SUB-COMPONENTES
@@ -197,6 +201,97 @@ const CategoryChip = ({ item }: { item: Category }) => (
   </TouchableOpacity>
 );
 
+/** Contenido del Banner (Separado para reutilización) */
+const PromotionBannerContent = ({ item }: { item: PromotionalBanner }) => {
+  const isYellow = item.bgColor === 'bg-power-yellow';
+  const textColor = isYellow ? 'text-power-darkGreen' : 'text-white';
+  const subtitleColor = isYellow ? 'text-power-darkGreen/70' : 'text-power-lightGreen';
+  const zapColor = isYellow ? '#113321' : '#FFD100';
+
+  return (
+    <View className={`rounded-2xl overflow-hidden h-32 ${item.bgColor} flex-row items-center px-5 shadow-lg w-full`}>
+      {/* Círculos decorativos de fondo */}
+      <View 
+        className={`absolute -right-8 -top-8 w-40 h-40 rounded-full ${isYellow ? 'bg-power-blue' : 'bg-power-lightGreen'} opacity-20`} 
+      />
+      <View className="absolute right-5 -bottom-10 w-28 h-28 rounded-full bg-white opacity-10" />
+
+      {/* Texto banner */}
+      <View className="flex-1">
+        <View className={`${isYellow ? 'bg-power-blue' : 'bg-power-yellow'} rounded-md px-2 py-0.5 self-start mb-1.5 shadow-sm`}>
+          <Text className={`${isYellow ? 'text-white' : 'text-power-darkGreen'} text-[10px] font-black tracking-widest`}>
+            🔥 EXCLUSIVO
+          </Text>
+        </View>
+        <Text className={`${textColor} text-xl font-black leading-tight`}>
+          {item.title}
+        </Text>
+        <Text className={`${subtitleColor} text-sm font-semibold`}>
+          {item.subtitle}
+        </Text>
+      </View>
+
+      {/* Ícono decorativo */}
+      <View className="w-14 h-14 rounded-full bg-white/10 items-center justify-center ml-3">
+        <Zap color={zapColor} size={28} fill={zapColor} />
+      </View>
+    </View>
+  );
+};
+
+/** Carrusel de Promociones con Autoplay y Peeking Infinito */
+const PromotionalCarousel = () => {
+  const flatListRef = useRef<FlatList>(null);
+
+  // Truco de lista virtualmente infinita (150 elementos ligeros)
+  const infiniteData = Array(50).fill(promotionalBanners).flat();
+  const INITIAL_INDEX = promotionalBanners.length * 25; // Empezamos en el medio para permitir scroll atrás
+
+  const [currentIndex, setCurrentIndex] = useState(INITIAL_INDEX);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const nextIndex = currentIndex + 1;
+      setCurrentIndex(nextIndex);
+      flatListRef.current?.scrollToIndex({
+        index: nextIndex,
+        animated: true,
+      });
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, [currentIndex]);
+
+  const getItemLayout = (_: any, index: number) => ({
+    length: ITEM_WIDTH + MARGIN * 2,
+    offset: (ITEM_WIDTH + MARGIN * 2) * index,
+    index,
+  });
+
+  return (
+    <FlatList
+      ref={flatListRef}
+      data={infiniteData}
+      keyExtractor={(_, index) => `banner-${index}`}
+      horizontal
+      showsHorizontalScrollIndicator={false}
+      snapToAlignment="center"
+      decelerationRate="fast"
+      snapToInterval={ITEM_WIDTH + MARGIN * 2}
+      initialScrollIndex={INITIAL_INDEX}
+      contentContainerStyle={{
+        paddingHorizontal: (SCREEN_WIDTH - (ITEM_WIDTH + MARGIN * 2)) / 2 + MARGIN,
+      }}
+      getItemLayout={getItemLayout}
+      renderItem={({ item }) => (
+        <View style={{ width: ITEM_WIDTH }} className="mx-2">
+          <PromotionBannerContent item={item} />
+        </View>
+      )}
+    />
+  );
+};
+
 // ────────────────────────────────────────────────────────────
 // PANTALLA PRINCIPAL
 // ────────────────────────────────────────────────────────────
@@ -271,33 +366,9 @@ export const CatalogScreen = () => {
         </View>
       </View>
 
-      {/* ══════ BANNER PROMOCIONAL ══════ */}
-      <View className="px-4 mt-5">
-        <View className="rounded-2xl overflow-hidden h-32 bg-power-darkGreen flex-row items-center px-5 shadow-lg">
-          {/* Círculos decorativos de fondo */}
-          <View className="absolute -right-8 -top-8 w-40 h-40 rounded-full bg-power-lightGreen opacity-20" />
-          <View className="absolute right-5 -bottom-10 w-28 h-28 rounded-full bg-power-yellow opacity-10" />
-
-          {/* Texto banner */}
-          <View className="flex-1">
-            <View className="bg-power-yellow rounded-md px-2 py-0.5 self-start mb-1.5 shadow-sm">
-              <Text className="text-power-darkGreen text-[10px] font-black tracking-widest">
-                🔥 EXCLUSIVO
-              </Text>
-            </View>
-            <Text className="text-white text-2xl font-black leading-tight">
-              30% DESCUENTO
-            </Text>
-            <Text className="text-power-lightGreen text-sm font-semibold">
-              Línea Profesional de Aseo
-            </Text>
-          </View>
-
-          {/* Ícono decorativo */}
-          <View className="w-14 h-14 rounded-full bg-white/10 items-center justify-center ml-3">
-            <Zap color="#FFD100" size={28} fill="#FFD100" />
-          </View>
-        </View>
+      {/* ══════ CARRUSEL PROMOCIONAL ══════ */}
+      <View className="mt-5">
+        <PromotionalCarousel />
       </View>
 
       {/* ══════ CATEGORÍAS (Quick Access) ══════ */}
