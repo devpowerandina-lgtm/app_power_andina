@@ -39,40 +39,25 @@ const ProductCard = ({ item, onAddToCart }: { item: Product; onAddToCart: (id: s
 
   return (
     <View
-      style={{
-        width: CARD_WIDTH,
-        margin: 4,
-        backgroundColor: '#ffffff',
-        borderRadius: 12,
-        overflow: 'hidden',
-        elevation: 3,
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.08,
-        shadowRadius: 6,
-      }}
+      className="bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100"
+      style={{ width: CARD_WIDTH, margin: 4 }}
     >
       {/* Imagen + botón flotante */}
-      <View style={{ position: 'relative' }}>
+      <View className="relative">
         <Image
           source={{ uri: item.image }}
-          style={{ width: '100%', height: CARD_WIDTH * 0.85, resizeMode: 'cover' }}
+          className="w-full"
+          style={{ height: CARD_WIDTH * 0.85, resizeMode: 'cover' }}
         />
 
         {/* Badge (Nuevo / Oferta) */}
         {item.badge && (
           <View
-            style={{
-              position: 'absolute',
-              top: 8,
-              left: 8,
-              backgroundColor: item.badge === 'Oferta' ? '#ef4444' : '#0284c7',
-              borderRadius: 6,
-              paddingHorizontal: 8,
-              paddingVertical: 3,
-            }}
+            className={`absolute top-2 left-2 px-2 py-0.5 rounded-md ${
+              item.badge === 'Oferta' ? 'bg-red-500' : 'bg-power-lightBlue'
+            }`}
           >
-            <Text style={{ color: '#fff', fontSize: 11, fontWeight: '700' }}>
+            <Text className="text-white text-[10px] font-bold">
               {item.badge}
             </Text>
           </View>
@@ -82,33 +67,19 @@ const ProductCard = ({ item, onAddToCart }: { item: Product; onAddToCart: (id: s
         <TouchableOpacity
           onPress={() => onAddToCart(item.id)}
           activeOpacity={0.8}
-          style={{
-            position: 'absolute',
-            bottom: -16,
-            right: 12,
-            width: 36,
-            height: 36,
-            borderRadius: 18,
-            backgroundColor: '#0284c7',
-            alignItems: 'center',
-            justifyContent: 'center',
-            elevation: 5,
-            shadowColor: '#0284c7',
-            shadowOffset: { width: 0, height: 3 },
-            shadowOpacity: 0.4,
-            shadowRadius: 6,
-          }}
+          className="absolute -bottom-4 right-3 w-9 h-9 rounded-full bg-power-lightBlue items-center justify-center shadow-lg"
+          style={{ elevation: 5 }}
         >
           <Plus color="#fff" size={20} strokeWidth={2.5} />
         </TouchableOpacity>
       </View>
 
       {/* Textos */}
-      <View style={{ padding: 10, paddingTop: 22 }}>
+      <View className="p-2.5 pt-5">
         {/* Estrellas */}
-        <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 4 }}>
-          <Star color="#f59e0b" size={12} fill="#f59e0b" />
-          <Text style={{ fontSize: 11, color: '#6b7280', marginLeft: 3 }}>
+        <View className="flex-row items-center mb-1">
+          <Star color="#FFD100" size={11} fill="#FFD100" />
+          <Text className="text-[10px] text-gray-500 ml-1">
             {item.rating} · {item.sold} vendidos
           </Text>
         </View>
@@ -116,25 +87,25 @@ const ProductCard = ({ item, onAddToCart }: { item: Product; onAddToCart: (id: s
         {/* Nombre */}
         <Text
           numberOfLines={2}
-          style={{ fontSize: 13, color: '#1e293b', lineHeight: 18, marginBottom: 6 }}
+          className="text-xs text-power-darkGreen font-medium leading-4 mb-1.5 h-8"
         >
           {item.name}
         </Text>
 
         {/* Precio tachado */}
         {item.originalPrice && (
-          <Text style={{ fontSize: 11, color: '#9ca3af', textDecorationLine: 'line-through' }}>
+          <Text className="text-[10px] text-gray-400 line-through">
             {formatPrice(item.originalPrice)}
           </Text>
         )}
 
         {/* Precio principal */}
-        <View style={{ flexDirection: 'row', alignItems: 'baseline', gap: 4 }}>
-          <Text style={{ fontSize: 18, fontWeight: '800', color: '#0f172a' }}>
+        <View className="flex-row items-baseline space-x-1">
+          <Text className="text-base font-extrabold text-power-blue">
             {formatPrice(item.price)}
           </Text>
           {discountPct && (
-            <Text style={{ fontSize: 12, color: '#16a34a', fontWeight: '700' }}>
+            <Text className="text-[10px] text-power-lightGreen font-bold">
               -{discountPct}%
             </Text>
           )}
@@ -153,60 +124,52 @@ const FeaturedCard = ({ item }: { item: Product }) => {
 
   return (
     <View
-      style={{
-        width: SCREEN_WIDTH * 0.62,
-        marginRight: 12,
-        backgroundColor: '#fff',
-        borderRadius: 14,
-        overflow: 'hidden',
-        elevation: 4,
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 3 },
-        shadowOpacity: 0.1,
-        shadowRadius: 8,
-      }}
+      className="bg-white rounded-2xl overflow-hidden shadow-md mr-3 border border-gray-50"
+      style={{ width: SCREEN_WIDTH * 0.65 }}
     >
-      <View style={{ position: 'relative' }}>
+      <View className="relative">
         <Image
           source={{ uri: item.image }}
-          style={{ width: '100%', height: 130, resizeMode: 'cover' }}
+          className="w-full h-32"
+          style={{ resizeMode: 'cover' }}
         />
         {item.badge && (
           <View
-            style={{
-              position: 'absolute',
-              top: 8,
-              left: 8,
-              backgroundColor: item.badge === 'Oferta' ? '#ef4444' : '#0284c7',
-              borderRadius: 6,
-              paddingHorizontal: 8,
-              paddingVertical: 3,
-            }}
+            className={`absolute top-2.5 left-2.5 px-2.5 py-1 rounded-lg ${
+              item.badge === 'Oferta' ? 'bg-red-500' : 'bg-power-lightBlue'
+            }`}
           >
-            <Text style={{ color: '#fff', fontSize: 11, fontWeight: '700' }}>
+            <Text className="text-white text-[11px] font-extrabold uppercase tracking-tight">
               {item.badge}
             </Text>
           </View>
         )}
       </View>
-      <View style={{ padding: 10 }}>
-        <Text numberOfLines={2} style={{ fontSize: 13, color: '#1e293b', marginBottom: 4 }}>
+      <View className="p-3">
+        <Text numberOfLines={2} className="text-sm text-power-darkGreen font-semibold mb-1 h-10">
           {item.name}
         </Text>
-        {item.originalPrice && (
-          <Text style={{ fontSize: 11, color: '#9ca3af', textDecorationLine: 'line-through' }}>
-            {formatPrice(item.originalPrice)}
-          </Text>
-        )}
-        <View style={{ flexDirection: 'row', alignItems: 'center', gap: 6 }}>
-          <Text style={{ fontSize: 16, fontWeight: '800', color: '#0f172a' }}>
-            {formatPrice(item.price)}
-          </Text>
-          {discountPct && (
-            <Text style={{ fontSize: 12, color: '#16a34a', fontWeight: '700' }}>
-              -{discountPct}%
-            </Text>
-          )}
+        <View className="flex-row items-center justify-between mt-1">
+          <View>
+            {item.originalPrice && (
+              <Text className="text-[10px] text-gray-400 line-through">
+                {formatPrice(item.originalPrice)}
+              </Text>
+            )}
+            <View className="flex-row items-center space-x-1.5">
+              <Text className="text-lg font-black text-power-blue">
+                {formatPrice(item.price)}
+              </Text>
+              {discountPct && (
+                <Text className="text-xs text-power-lightGreen font-bold">
+                  -{discountPct}%
+                </Text>
+              )}
+            </View>
+          </View>
+          <TouchableOpacity className="bg-power-yellow p-2 rounded-full shadow-sm">
+            <Plus color="#113321" size={18} strokeWidth={3} />
+          </TouchableOpacity>
         </View>
       </View>
     </View>
@@ -217,29 +180,17 @@ const FeaturedCard = ({ item }: { item: Product }) => {
 const CategoryChip = ({ item }: { item: Category }) => (
   <TouchableOpacity
     activeOpacity={0.7}
-    style={{ alignItems: 'center', marginRight: 16, width: 68 }}
+    className="items-center mr-4 w-16"
   >
     <View
-      style={{
-        width: 56,
-        height: 56,
-        borderRadius: 28,
-        backgroundColor: item.color,
-        alignItems: 'center',
-        justifyContent: 'center',
-        marginBottom: 6,
-        elevation: 2,
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 1 },
-        shadowOpacity: 0.06,
-        shadowRadius: 4,
-      }}
+      className="w-14 h-14 rounded-full items-center justify-center mb-1.5 shadow-sm"
+      style={{ backgroundColor: item.color }}
     >
-      <Text style={{ fontSize: 24 }}>{item.icon}</Text>
+      <Text className="text-2xl">{item.icon}</Text>
     </View>
     <Text
       numberOfLines={1}
-      style={{ fontSize: 11, color: '#374151', textAlign: 'center', fontWeight: '500' }}
+      className="text-[10px] text-power-darkGreen text-center font-bold uppercase tracking-tight"
     >
       {item.name}
     </Text>
@@ -270,176 +221,89 @@ export const CatalogScreen = () => {
     <View>
       {/* ══════ HEADER BAR ══════ */}
       <View
-        style={{
-          backgroundColor: '#0284c7',
-          paddingTop: StatusBar.currentHeight ? StatusBar.currentHeight + 8 : 44,
-          paddingBottom: 12,
-          paddingHorizontal: 16,
-        }}
+        className="bg-power-blue px-4 pb-4 shadow-lg"
+        style={{ paddingTop: StatusBar.currentHeight ? StatusBar.currentHeight + 10 : 50 }}
       >
         {/* Fila superior: logo + íconos */}
-        <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 12 }}>
-          <View style={{ flex: 1 }}>
-            <Text style={{ color: '#bae6fd', fontSize: 11, fontWeight: '600', letterSpacing: 1.5 }}>
+        <View className="flex-row items-center mb-4">
+          <View className="flex-1">
+            <Text className="text-power-lightGreen text-[10px] font-black uppercase tracking-[2px] mb-0.5">
               POWER ANDINA
             </Text>
-            <Text style={{ color: '#fff', fontSize: 17, fontWeight: '800' }}>
-              Catálogo
+            <Text className="text-white text-xl font-black">
+              Tienda Oficial
             </Text>
           </View>
-          {/* Carrito */}
-          <TouchableOpacity style={{ marginRight: 12, position: 'relative' }}>
-            <ShoppingCart color="#fff" size={24} />
-            {cartCount > 0 && (
-              <View
-                style={{
-                  position: 'absolute',
-                  top: -6,
-                  right: -6,
-                  backgroundColor: '#f59e0b',
-                  borderRadius: 9,
-                  width: 18,
-                  height: 18,
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}
-              >
-                <Text style={{ color: '#fff', fontSize: 10, fontWeight: '800' }}>
-                  {cartCount > 9 ? '9+' : cartCount}
-                </Text>
-              </View>
-            )}
-          </TouchableOpacity>
-          {/* Notificaciones */}
-          <TouchableOpacity style={{ marginRight: 4 }}>
-            <Bell color="#fff" size={24} />
-          </TouchableOpacity>
-          {/* Logout */}
-          <TouchableOpacity onPress={handleSignOut} style={{ marginLeft: 8 }}>
-            <LogOut color="#bae6fd" size={22} />
-          </TouchableOpacity>
+          <View className="flex-row items-center space-x-3">
+            {/* Carrito */}
+            <TouchableOpacity className="relative">
+              <ShoppingCart color="#fff" size={22} strokeWidth={2.5} />
+              {cartCount > 0 && (
+                <View className="absolute -top-1.5 -right-1.5 bg-power-yellow rounded-full w-4.5 h-4.5 items-center justify-center border-2 border-power-blue">
+                  <Text className="text-power-darkGreen text-[9px] font-black">
+                    {cartCount > 9 ? '9+' : cartCount}
+                  </Text>
+                </View>
+              )}
+            </TouchableOpacity>
+            {/* Notificaciones */}
+            <TouchableOpacity>
+              <Bell color="#fff" size={22} strokeWidth={2} />
+            </TouchableOpacity>
+            {/* Logout */}
+            <TouchableOpacity onPress={handleSignOut} className="bg-white/10 p-1.5 rounded-lg">
+              <LogOut color="#fff" size={18} />
+            </TouchableOpacity>
+          </View>
         </View>
 
         {/* Barra de búsqueda */}
-        <View
-          style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            backgroundColor: '#fff',
-            borderRadius: 10,
-            paddingHorizontal: 12,
-            paddingVertical: 9,
-          }}
-        >
-          <Search color="#9ca3af" size={18} />
+        <View className="flex-row items-center bg-white rounded-xl px-4 py-3 shadow-sm">
+          <Search color="#94a3b8" size={18} strokeWidth={2.5} />
           <TextInput
             value={searchQuery}
             onChangeText={setSearchQuery}
-            placeholder="Buscar productos Power Andina..."
-            placeholderTextColor="#9ca3af"
-            style={{ flex: 1, marginLeft: 8, fontSize: 14, color: '#1e293b', padding: 0 }}
+            placeholder="¿Qué estás buscando hoy?"
+            placeholderTextColor="#94a3b8"
+            className="flex-1 ml-3 text-sm text-power-darkGreen font-medium p-0"
             returnKeyType="search"
           />
         </View>
       </View>
 
       {/* ══════ BANNER PROMOCIONAL ══════ */}
-      <View style={{ paddingHorizontal: 12, paddingTop: 14 }}>
-        <View
-          style={{
-            borderRadius: 16,
-            overflow: 'hidden',
-            height: 120,
-            backgroundColor: '#0369a1',
-            flexDirection: 'row',
-            alignItems: 'center',
-            paddingHorizontal: 20,
-            elevation: 4,
-            shadowColor: '#0369a1',
-            shadowOffset: { width: 0, height: 4 },
-            shadowOpacity: 0.3,
-            shadowRadius: 8,
-          }}
-        >
-          {/* Círculo decorativo de fondo */}
-          <View
-            style={{
-              position: 'absolute',
-              right: -30,
-              top: -30,
-              width: 160,
-              height: 160,
-              borderRadius: 80,
-              backgroundColor: '#0284c7',
-              opacity: 0.5,
-            }}
-          />
-          <View
-            style={{
-              position: 'absolute',
-              right: 20,
-              bottom: -40,
-              width: 120,
-              height: 120,
-              borderRadius: 60,
-              backgroundColor: '#0ea5e9',
-              opacity: 0.3,
-            }}
-          />
+      <View className="px-4 mt-5">
+        <View className="rounded-2xl overflow-hidden h-32 bg-power-darkGreen flex-row items-center px-5 shadow-lg">
+          {/* Círculos decorativos de fondo */}
+          <View className="absolute -right-8 -top-8 w-40 h-40 rounded-full bg-power-lightGreen opacity-20" />
+          <View className="absolute right-5 -bottom-10 w-28 h-28 rounded-full bg-power-yellow opacity-10" />
 
           {/* Texto banner */}
-          <View style={{ flex: 1 }}>
-            <View
-              style={{
-                backgroundColor: '#f59e0b',
-                borderRadius: 6,
-                paddingHorizontal: 8,
-                paddingVertical: 3,
-                alignSelf: 'flex-start',
-                marginBottom: 6,
-              }}
-            >
-              <Text style={{ color: '#fff', fontSize: 11, fontWeight: '800', letterSpacing: 0.5 }}>
-                🔥 PROMO ESPECIAL
+          <View className="flex-1">
+            <View className="bg-power-yellow rounded-md px-2 py-0.5 self-start mb-1.5 shadow-sm">
+              <Text className="text-power-darkGreen text-[10px] font-black tracking-widest">
+                🔥 EXCLUSIVO
               </Text>
             </View>
-            <Text style={{ color: '#fff', fontSize: 20, fontWeight: '900', lineHeight: 24 }}>
-              Hasta 30% OFF
+            <Text className="text-white text-2xl font-black leading-tight">
+              30% DESCUENTO
             </Text>
-            <Text style={{ color: '#bae6fd', fontSize: 13, marginTop: 2 }}>
-              en productos de aseo industrial
+            <Text className="text-power-lightGreen text-sm font-semibold">
+              Línea Profesional de Aseo
             </Text>
           </View>
 
           {/* Ícono decorativo */}
-          <View
-            style={{
-              width: 60,
-              height: 60,
-              borderRadius: 30,
-              backgroundColor: 'rgba(255,255,255,0.15)',
-              alignItems: 'center',
-              justifyContent: 'center',
-              marginLeft: 12,
-            }}
-          >
-            <Zap color="#f59e0b" size={32} fill="#f59e0b" />
+          <View className="w-14 h-14 rounded-full bg-white/10 items-center justify-center ml-3">
+            <Zap color="#FFD100" size={28} fill="#FFD100" />
           </View>
         </View>
       </View>
 
       {/* ══════ CATEGORÍAS (Quick Access) ══════ */}
-      <View style={{ paddingTop: 20, paddingBottom: 4 }}>
-        <Text
-          style={{
-            fontSize: 15,
-            fontWeight: '700',
-            color: '#1e293b',
-            paddingHorizontal: 16,
-            marginBottom: 12,
-          }}
-        >
-          Categorías
+      <View className="mt-6">
+        <Text className="text-sm font-black text-power-darkGreen px-4 mb-3 uppercase tracking-tighter">
+          Nuestras Categorías
         </Text>
         <ScrollView
           horizontal
@@ -453,22 +317,14 @@ export const CatalogScreen = () => {
       </View>
 
       {/* ══════ PRODUCTOS DESTACADOS ══════ */}
-      <View style={{ paddingTop: 20, paddingBottom: 8 }}>
-        <View
-          style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            paddingHorizontal: 16,
-            marginBottom: 12,
-          }}
-        >
-          <Text style={{ fontSize: 15, fontWeight: '700', color: '#1e293b' }}>
-            ⭐ Destacados
+      <View className="mt-6">
+        <View className="flex-row items-center justify-between px-4 mb-3">
+          <Text className="text-sm font-black text-power-darkGreen uppercase tracking-tighter">
+            ⭐ Recomendados
           </Text>
           <TouchableOpacity>
-            <Text style={{ fontSize: 13, color: '#0284c7', fontWeight: '600' }}>
-              Ver todos
+            <Text className="text-xs color-power-lightBlue font-bold">
+              Explorar todo
             </Text>
           </TouchableOpacity>
         </View>
@@ -486,22 +342,15 @@ export const CatalogScreen = () => {
       </View>
 
       {/* Título del grid principal */}
-      <View
-        style={{
-          paddingHorizontal: 16,
-          paddingTop: 20,
-          paddingBottom: 8,
-          flexDirection: 'row',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-        }}
-      >
-        <Text style={{ fontSize: 15, fontWeight: '700', color: '#1e293b' }}>
-          🛒 Catálogo completo
+      <View className="px-4 mt-8 mb-3 flex-row items-center justify-between">
+        <Text className="text-sm font-black text-power-darkGreen uppercase tracking-tighter">
+          🛒 Catálogo de Productos
         </Text>
-        <Text style={{ fontSize: 12, color: '#6b7280' }}>
-          {catalogProducts.length} productos
-        </Text>
+        <View className="bg-gray-100 px-2 py-0.5 rounded-full">
+          <Text className="text-[10px] text-gray-500 font-bold">
+            {catalogProducts.length} ÍTEMS
+          </Text>
+        </View>
       </View>
     </View>
   );
@@ -514,8 +363,8 @@ export const CatalogScreen = () => {
   );
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: '#f1f5f9' }}>
-      <StatusBar barStyle="light-content" backgroundColor="#0284c7" />
+    <SafeAreaView className="flex-1 bg-power-background">
+      <StatusBar barStyle="light-content" />
 
       <FlatList
         data={catalogProducts}
@@ -523,8 +372,8 @@ export const CatalogScreen = () => {
         numColumns={2}
         renderItem={renderItem}
         ListHeaderComponent={<ListHeader />}
-        contentContainerStyle={{ paddingHorizontal: 8, paddingBottom: 24 }}
-        columnWrapperStyle={{ justifyContent: 'space-between' }}
+        contentContainerStyle={{ paddingBottom: 40 }}
+        columnWrapperStyle={{ paddingHorizontal: 12 }}
         showsVerticalScrollIndicator={false}
         removeClippedSubviews={true}
         initialNumToRender={6}

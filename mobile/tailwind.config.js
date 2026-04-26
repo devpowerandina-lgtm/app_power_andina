@@ -6,6 +6,14 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        power: {
+          darkGreen: '#113321', // Verde oscuro (POWER)
+          lightGreen: '#8CC63F', // Verde lima (ANDINA)
+          blue: '#1C4076', // Azul marino corporativo
+          lightBlue: '#2082C6', // Azul claro/celeste
+          yellow: '#FFD100', // Amarillo (Fantasia/Wind)
+          background: '#F5F5F5', // Gris claro para fondo
+        },
         primary: {
           50: '#f0f9ff',
           100: '#e0f2fe',
