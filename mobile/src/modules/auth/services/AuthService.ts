@@ -1,4 +1,4 @@
-import { supabase } from '../../shared/infrastructure/SupabaseClient';
+import { supabase } from '../../../shared/infrastructure/SupabaseClient';
 import { RegisterUserData, LoginUserData, AuthResponse } from './types';
 
 export class AuthService {
