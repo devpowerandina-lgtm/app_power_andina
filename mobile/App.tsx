@@ -7,12 +7,13 @@ import { LoginScreen } from './src/modules/auth/pages/LoginScreen';
 import { RegisterScreen } from './src/modules/auth/pages/RegisterScreen';
 import { OfflineScreen } from './src/modules/auth/pages/OfflineScreen';
 import { CatalogScreen } from './src/modules/catalog/pages/CatalogScreen';
+import { NotificationScreen } from './src/modules/notifications/pages/NotificationScreen';
 import { useNetworkStatus } from './src/shared/hooks/useNetworkStatus';
 import { supabase } from './src/shared/infrastructure/supabase';
 
 export default function App() {
   const { isConnected } = useNetworkStatus();
-  const [currentScreen, setCurrentScreen] = useState<'login' | 'register' | 'home'>('login');
+  const [currentScreen, setCurrentScreen] = useState<'login' | 'register' | 'home' | 'notifications'>('login');
   const [session, setSession] = useState<any>(null);
   const [loading, setLoading] = useState(true);
 
@@ -61,7 +62,11 @@ export default function App() {
       )}
 
       {currentScreen === 'home' && (
-        <CatalogScreen />
+        <CatalogScreen onNavigateToNotifications={() => setCurrentScreen('notifications')} />
+      )}
+
+      {currentScreen === 'notifications' && (
+        <NotificationScreen onBack={() => setCurrentScreen('home')} />
       )}
     </View>
   );

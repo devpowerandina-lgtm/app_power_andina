@@ -160,6 +160,7 @@ export interface PromotionalBanner {
   title: string;
   subtitle: string;
   bgColor: string;
+  image?: string;
 }
 
 // ────────────────────────────────────────────────────────────
@@ -171,18 +172,21 @@ export const promotionalBanners: PromotionalBanner[] = [
     title: '20% en Desengrasantes',
     subtitle: 'Limpia profundamente con Power Andina',
     bgColor: 'bg-power-blue',
+    image: 'https://picsum.photos/seed/banner1/800/450',
   },
   {
     id: 'b2',
     title: 'Nuevos Suavizantes',
     subtitle: 'Fragancias que perduran por más tiempo',
     bgColor: 'bg-power-lightGreen',
+    image: 'https://picsum.photos/seed/banner2/800/450',
   },
   {
     id: 'b3',
     title: 'Kits de Limpieza',
     subtitle: 'Todo lo que necesitas en un solo pack',
     bgColor: 'bg-power-yellow',
+    image: 'https://picsum.photos/seed/banner3/800/450',
   },
 ];
 

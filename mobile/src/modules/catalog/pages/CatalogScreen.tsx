@@ -12,6 +12,7 @@ import {
   Dimensions,
   ListRenderItemInfo,
 } from 'react-native';
+import Carousel from 'react-native-reanimated-carousel';
 import { Search, ShoppingCart, Bell, LogOut, Plus, Star, Zap } from 'lucide-react-native';
 import { signOut } from '../../auth/services/AuthService';
 import {
@@ -209,7 +210,21 @@ const PromotionBannerContent = ({ item }: { item: PromotionalBanner }) => {
   const zapColor = isYellow ? '#113321' : '#FFD100';
 
   return (
-    <View className={`rounded-2xl overflow-hidden h-32 ${item.bgColor} flex-row items-center px-5 shadow-lg w-full`}>
+    <View className={`rounded-2xl overflow-hidden h-full ${item.bgColor} flex-row items-center px-5 shadow-lg w-full`}>
+      {/* Imagen de fondo del banner */}
+      {item.image && (
+        <Image
+          source={{ uri: item.image }}
+          className="absolute inset-0 w-full h-full"
+          style={{ resizeMode: 'cover', opacity: 0.6 }}
+        />
+      )}
+      
+      {/* Overlay oscuro para legibilidad si hay imagen */}
+      {item.image && (
+        <View className="absolute inset-0 bg-black/20" />
+      )}
+
       {/* Círculos decorativos de fondo */}
       <View 
         className={`absolute -right-8 -top-8 w-40 h-40 rounded-full ${isYellow ? 'bg-power-blue' : 'bg-power-lightGreen'} opacity-20`} 
@@ -217,74 +232,46 @@ const PromotionBannerContent = ({ item }: { item: PromotionalBanner }) => {
       <View className="absolute right-5 -bottom-10 w-28 h-28 rounded-full bg-white opacity-10" />
 
       {/* Texto banner */}
-      <View className="flex-1">
+      <View className="flex-1 relative z-10">
         <View className={`${isYellow ? 'bg-power-blue' : 'bg-power-yellow'} rounded-md px-2 py-0.5 self-start mb-1.5 shadow-sm`}>
           <Text className={`${isYellow ? 'text-white' : 'text-power-darkGreen'} text-[10px] font-black tracking-widest`}>
             🔥 EXCLUSIVO
           </Text>
         </View>
-        <Text className={`${textColor} text-xl font-black leading-tight`}>
+        <Text className={`${textColor} text-2xl font-black leading-tight mb-1`}>
           {item.title}
         </Text>
-        <Text className={`${subtitleColor} text-sm font-semibold`}>
+        <Text className={`${subtitleColor} text-base font-bold`}>
           {item.subtitle}
         </Text>
       </View>
 
       {/* Ícono decorativo */}
-      <View className="w-14 h-14 rounded-full bg-white/10 items-center justify-center ml-3">
-        <Zap color={zapColor} size={28} fill={zapColor} />
+      <View className="w-16 h-16 rounded-full bg-white/20 items-center justify-center ml-3 relative z-10">
+        <Zap color={zapColor} size={32} fill={zapColor} />
       </View>
     </View>
   );
 };
 
-/** Carrusel de Promociones con Autoplay y Peeking Infinito */
+/** Carrusel de Promociones con Loop Infinito Real */
 const PromotionalCarousel = () => {
-  const flatListRef = useRef<FlatList>(null);
-
-  // Truco de lista virtualmente infinita (150 elementos ligeros)
-  const infiniteData = Array(50).fill(promotionalBanners).flat();
-  const INITIAL_INDEX = promotionalBanners.length * 25; // Empezamos en el medio para permitir scroll atrás
-
-  const [currentIndex, setCurrentIndex] = useState(INITIAL_INDEX);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      const nextIndex = currentIndex + 1;
-      setCurrentIndex(nextIndex);
-      flatListRef.current?.scrollToIndex({
-        index: nextIndex,
-        animated: true,
-      });
-    }, 3000);
-
-    return () => clearInterval(interval);
-  }, [currentIndex]);
-
-  const getItemLayout = (_: any, index: number) => ({
-    length: ITEM_WIDTH + MARGIN * 2,
-    offset: (ITEM_WIDTH + MARGIN * 2) * index,
-    index,
-  });
-
   return (
-    <FlatList
-      ref={flatListRef}
-      data={infiniteData}
-      keyExtractor={(_, index) => `banner-${index}`}
-      horizontal
-      showsHorizontalScrollIndicator={false}
-      snapToAlignment="center"
-      decelerationRate="fast"
-      snapToInterval={ITEM_WIDTH + MARGIN * 2}
-      initialScrollIndex={INITIAL_INDEX}
-      contentContainerStyle={{
-        paddingHorizontal: (SCREEN_WIDTH - (ITEM_WIDTH + MARGIN * 2)) / 2 + MARGIN,
+    <Carousel
+      loop
+      width={SCREEN_WIDTH}
+      height={SCREEN_WIDTH * 0.60}
+      autoPlay={true}
+      autoPlayInterval={3000}
+      data={promotionalBanners}
+      scrollAnimationDuration={1000}
+      mode="parallax"
+      modeConfig={{
+        parallaxScrollingScale: 0.9,
+        parallaxScrollingOffset: 50,
       }}
-      getItemLayout={getItemLayout}
       renderItem={({ item }) => (
-        <View style={{ width: ITEM_WIDTH }} className="mx-2">
+        <View className="px-4">
           <PromotionBannerContent item={item} />
         </View>
       )}
@@ -295,7 +282,7 @@ const PromotionalCarousel = () => {
 // ────────────────────────────────────────────────────────────
 // PANTALLA PRINCIPAL
 // ────────────────────────────────────────────────────────────
-export const CatalogScreen = () => {
+export const CatalogScreen = ({ onNavigateToNotifications }: { onNavigateToNotifications: () => void }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [cartCount, setCartCount] = useState(0);
 
@@ -330,19 +317,8 @@ export const CatalogScreen = () => {
             </Text>
           </View>
           <View className="flex-row items-center space-x-3">
-            {/* Carrito */}
-            <TouchableOpacity className="relative">
-              <ShoppingCart color="#fff" size={22} strokeWidth={2.5} />
-              {cartCount > 0 && (
-                <View className="absolute -top-1.5 -right-1.5 bg-power-yellow rounded-full w-4.5 h-4.5 items-center justify-center border-2 border-power-blue">
-                  <Text className="text-power-darkGreen text-[9px] font-black">
-                    {cartCount > 9 ? '9+' : cartCount}
-                  </Text>
-                </View>
-              )}
-            </TouchableOpacity>
             {/* Notificaciones */}
-            <TouchableOpacity>
+            <TouchableOpacity onPress={onNavigateToNotifications}>
               <Bell color="#fff" size={22} strokeWidth={2} />
             </TouchableOpacity>
             {/* Logout */}
@@ -451,6 +427,29 @@ export const CatalogScreen = () => {
         maxToRenderPerBatch={4}
         windowSize={5}
       />
+
+      {/* ══════ CARRITO FLOTANTE (FAB) ══════ */}
+      <View 
+        className="absolute bottom-8 w-full items-center justify-center pointer-events-box-none"
+      >
+        <TouchableOpacity
+          activeOpacity={0.9}
+          onPress={() => console.log('Ir al carrito')}
+          className="bg-power-blue rounded-full p-5 shadow-lg border border-white/20 items-center justify-center"
+          style={{ elevation: 5 }}
+        >
+          <ShoppingCart color="white" size={30} strokeWidth={2.5} />
+          
+          {/* Badge (Indicador) */}
+          <View 
+            className="absolute -top-1 -right-1 bg-red-500 rounded-full w-6 h-6 items-center justify-center border-2 border-white shadow-md"
+          >
+            <Text className="text-white text-[11px] font-black">
+              {cartCount}
+            </Text>
+          </View>
+        </TouchableOpacity>
+      </View>
     </SafeAreaView>
   );
 };
