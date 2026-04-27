@@ -25,6 +25,7 @@ import {
   Category,
   PromotionalBanner,
 } from '../services/ProductService';
+import { useCartStore } from '../../cart/store/useCartStore';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 const CARD_WIDTH = (SCREEN_WIDTH - 32) / 2; // 2 columnas con padding lateral
@@ -296,13 +297,16 @@ const PromotionalCarousel = () => {
 // ────────────────────────────────────────────────────────────
 export const CatalogScreen = ({ 
   onNavigateToNotifications,
-  onNavigateToDetails 
+  onNavigateToDetails,
+  onNavigateToCart,
 }: { 
   onNavigateToNotifications: () => void;
   onNavigateToDetails: (id: string) => void;
+  onNavigateToCart: () => void;
 }) => {
   const [searchQuery, setSearchQuery] = useState('');
-  const [cartCount, setCartCount] = useState(0);
+  const addToCart = useCartStore((state) => state.addToCart);
+  const cartCount = useCartStore((state) => state.totalItems)();
 
   const handleSignOut = async () => {
     try {
@@ -313,8 +317,11 @@ export const CatalogScreen = ({
   };
 
   const handleAddToCart = useCallback((id: string) => {
-    setCartCount((c) => c + 1);
-  }, []);
+    const product = [...featuredProducts, ...catalogProducts].find((p) => p.id === id);
+    if (product) {
+      addToCart(product, product.sizes?.[0] || '', product.aromas?.[0] || '', 1);
+    }
+  }, [addToCart]);
 
   // ── ListHeaderComponent: todo lo que va ANTES del grid ──
   const ListHeader = () => (
@@ -456,7 +463,7 @@ export const CatalogScreen = ({
       >
         <TouchableOpacity
           activeOpacity={0.9}
-          onPress={() => console.log('Ir al carrito')}
+          onPress={onNavigateToCart}
           className="bg-power-blue rounded-full p-5 shadow-lg border border-white/20 items-center justify-center"
           style={{ elevation: 5 }}
         >

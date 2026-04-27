@@ -8,13 +8,14 @@ import { RegisterScreen } from './src/modules/auth/pages/RegisterScreen';
 import { OfflineScreen } from './src/modules/auth/pages/OfflineScreen';
 import { CatalogScreen } from './src/modules/catalog/pages/CatalogScreen';
 import { ProductDetailScreen } from './src/modules/catalog/pages/ProductDetailScreen';
+import { CartScreen } from './src/modules/cart/pages/CartScreen';
 import { NotificationScreen } from './src/modules/notifications/pages/NotificationScreen';
 import { useNetworkStatus } from './src/shared/hooks/useNetworkStatus';
 import { supabase } from './src/shared/infrastructure/supabase';
 
 export default function App() {
   const { isConnected } = useNetworkStatus();
-  const [currentScreen, setCurrentScreen] = useState<'login' | 'register' | 'home' | 'notifications' | 'details'>('login');
+  const [currentScreen, setCurrentScreen] = useState<'login' | 'register' | 'home' | 'notifications' | 'details' | 'cart'>('login');
   const [selectedProductId, setSelectedProductId] = useState<string | null>(null);
   const [session, setSession] = useState<any>(null);
   const [loading, setLoading] = useState(true);
@@ -70,6 +71,7 @@ export default function App() {
             setSelectedProductId(id);
             setCurrentScreen('details');
           }}
+          onNavigateToCart={() => setCurrentScreen('cart')}
         />
       )}
 
@@ -82,6 +84,10 @@ export default function App() {
           productId={selectedProductId}
           onBack={() => setCurrentScreen('home')}
         />
+      )}
+
+      {currentScreen === 'cart' && (
+        <CartScreen onBack={() => setCurrentScreen('home')} />
       )}
     </View>
   );

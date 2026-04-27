@@ -9,7 +9,9 @@ import {
   Dimensions,
   StatusBar,
   Share,
+  Alert,
 } from 'react-native';
+import { useCartStore } from '../../cart/store/useCartStore';
 import { 
   ChevronLeft, 
   Share2, 
@@ -39,6 +41,16 @@ export const ProductDetailScreen = ({ productId, onBack }: ProductDetailScreenPr
   const [selectedSize, setSelectedSize] = useState(product?.sizes?.[0] || '');
   const [selectedAroma, setSelectedAroma] = useState(product?.aromas?.[0] || '');
   const [quantity, setQuantity] = useState(1);
+  const addToCart = useCartStore((state) => state.addToCart);
+
+  const handleAddToCart = () => {
+    addToCart(product!, selectedSize, selectedAroma, quantity);
+    Alert.alert(
+      '✅ Agregado al carrito',
+      `${product?.name}${selectedSize ? ` · ${selectedSize}` : ''}${selectedAroma ? ` · ${selectedAroma}` : ''} x${quantity}`,
+      [{ text: 'Entendido', style: 'default' }]
+    );
+  };
   
   if (!product) {
     return (
@@ -250,6 +262,7 @@ export const ProductDetailScreen = ({ productId, onBack }: ProductDetailScreenPr
         {/* Botón Comprar */}
         <TouchableOpacity 
           activeOpacity={0.8}
+          onPress={handleAddToCart}
           className="flex-1 bg-power-blue h-14 rounded-xl flex-row items-center justify-center shadow-lg shadow-power-blue/30"
         >
           <ShoppingCart color="white" size={20} style={{ marginRight: 8 }} />
