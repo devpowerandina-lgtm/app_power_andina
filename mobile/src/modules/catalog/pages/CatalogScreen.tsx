@@ -36,14 +36,24 @@ const MARGIN = 8; // Correspondiente a mx-2
 // ────────────────────────────────────────────────────────────
 
 /** Tarjeta de producto para el grid de 2 columnas */
-const ProductCard = ({ item, onAddToCart }: { item: Product; onAddToCart: (id: string) => void }) => {
+const ProductCard = ({ 
+  item, 
+  onAddToCart,
+  onPress
+}: { 
+  item: Product; 
+  onAddToCart: (id: string) => void;
+  onPress: (id: string) => void;
+}) => {
   const discountPct =
     item.originalPrice
       ? Math.round(((item.originalPrice - item.price) / item.originalPrice) * 100)
       : null;
 
   return (
-    <View
+    <TouchableOpacity
+      activeOpacity={0.9}
+      onPress={() => onPress(item.id)}
       className="bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100"
       style={{ width: CARD_WIDTH, margin: 4 }}
     >
@@ -116,19 +126,21 @@ const ProductCard = ({ item, onAddToCart }: { item: Product; onAddToCart: (id: s
           )}
         </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
 /** Tarjeta de producto destacado (FlatList horizontal) */
-const FeaturedCard = ({ item }: { item: Product }) => {
+const FeaturedCard = ({ item, onPress }: { item: Product; onPress: (id: string) => void }) => {
   const discountPct =
     item.originalPrice
       ? Math.round(((item.originalPrice - item.price) / item.originalPrice) * 100)
       : null;
 
   return (
-    <View
+    <TouchableOpacity
+      activeOpacity={0.9}
+      onPress={() => onPress(item.id)}
       className="bg-white rounded-2xl overflow-hidden shadow-md mr-3 border border-gray-50"
       style={{ width: SCREEN_WIDTH * 0.65 }}
     >
@@ -177,7 +189,7 @@ const FeaturedCard = ({ item }: { item: Product }) => {
           </TouchableOpacity>
         </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
@@ -282,7 +294,13 @@ const PromotionalCarousel = () => {
 // ────────────────────────────────────────────────────────────
 // PANTALLA PRINCIPAL
 // ────────────────────────────────────────────────────────────
-export const CatalogScreen = ({ onNavigateToNotifications }: { onNavigateToNotifications: () => void }) => {
+export const CatalogScreen = ({ 
+  onNavigateToNotifications,
+  onNavigateToDetails 
+}: { 
+  onNavigateToNotifications: () => void;
+  onNavigateToDetails: (id: string) => void;
+}) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [cartCount, setCartCount] = useState(0);
 
@@ -382,7 +400,7 @@ export const CatalogScreen = ({ onNavigateToNotifications }: { onNavigateToNotif
           horizontal
           showsHorizontalScrollIndicator={false}
           contentContainerStyle={{ paddingHorizontal: 16 }}
-          renderItem={({ item }) => <FeaturedCard item={item} />}
+          renderItem={({ item }) => <FeaturedCard item={item} onPress={onNavigateToDetails} />}
           scrollEnabled
           nestedScrollEnabled
         />
@@ -404,9 +422,13 @@ export const CatalogScreen = ({ onNavigateToNotifications }: { onNavigateToNotif
 
   const renderItem = useCallback(
     ({ item }: ListRenderItemInfo<Product>) => (
-      <ProductCard item={item} onAddToCart={handleAddToCart} />
+      <ProductCard 
+        item={item} 
+        onAddToCart={handleAddToCart} 
+        onPress={onNavigateToDetails} 
+      />
     ),
-    [handleAddToCart]
+    [handleAddToCart, onNavigateToDetails]
   );
 
   return (

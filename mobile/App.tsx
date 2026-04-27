@@ -7,13 +7,15 @@ import { LoginScreen } from './src/modules/auth/pages/LoginScreen';
 import { RegisterScreen } from './src/modules/auth/pages/RegisterScreen';
 import { OfflineScreen } from './src/modules/auth/pages/OfflineScreen';
 import { CatalogScreen } from './src/modules/catalog/pages/CatalogScreen';
+import { ProductDetailScreen } from './src/modules/catalog/pages/ProductDetailScreen';
 import { NotificationScreen } from './src/modules/notifications/pages/NotificationScreen';
 import { useNetworkStatus } from './src/shared/hooks/useNetworkStatus';
 import { supabase } from './src/shared/infrastructure/supabase';
 
 export default function App() {
   const { isConnected } = useNetworkStatus();
-  const [currentScreen, setCurrentScreen] = useState<'login' | 'register' | 'home' | 'notifications'>('login');
+  const [currentScreen, setCurrentScreen] = useState<'login' | 'register' | 'home' | 'notifications' | 'details'>('login');
+  const [selectedProductId, setSelectedProductId] = useState<string | null>(null);
   const [session, setSession] = useState<any>(null);
   const [loading, setLoading] = useState(true);
 
@@ -46,27 +48,40 @@ export default function App() {
   return (
     <View className="flex-1">
       <StatusBar style="light" />
-      
+
       {currentScreen === 'login' && (
-        <LoginScreen 
-          onNavigateToRegister={() => setCurrentScreen('register')} 
+        <LoginScreen
+          onNavigateToRegister={() => setCurrentScreen('register')}
           onLoginSuccess={() => setCurrentScreen('home')}
         />
       )}
-      
+
       {currentScreen === 'register' && (
-        <RegisterScreen 
-          onNavigateToLogin={() => setCurrentScreen('login')} 
+        <RegisterScreen
+          onNavigateToLogin={() => setCurrentScreen('login')}
           onRegisterSuccess={() => setCurrentScreen('home')}
         />
       )}
 
       {currentScreen === 'home' && (
-        <CatalogScreen onNavigateToNotifications={() => setCurrentScreen('notifications')} />
+        <CatalogScreen
+          onNavigateToNotifications={() => setCurrentScreen('notifications')}
+          onNavigateToDetails={(id) => {
+            setSelectedProductId(id);
+            setCurrentScreen('details');
+          }}
+        />
       )}
 
       {currentScreen === 'notifications' && (
         <NotificationScreen onBack={() => setCurrentScreen('home')} />
+      )}
+
+      {currentScreen === 'details' && selectedProductId && (
+        <ProductDetailScreen
+          productId={selectedProductId}
+          onBack={() => setCurrentScreen('home')}
+        />
       )}
     </View>
   );

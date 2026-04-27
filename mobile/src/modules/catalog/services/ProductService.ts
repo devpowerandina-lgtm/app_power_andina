@@ -15,10 +15,15 @@ export interface Product {
   price: number;
   originalPrice?: number;
   image: string;
+  images?: string[]; // Para el carrusel de detalles
   category: string;
   badge?: string; // 'Nuevo', 'Oferta', etc.
   rating: number;
   sold: number;
+  description?: string;
+  sizes?: string[];
+  aromas?: string[];
+  priceBySize?: Record<string, number>;
 }
 
 // ────────────────────────────────────────────────────────────
@@ -80,9 +85,18 @@ export const catalogProducts: Product[] = [
     name: 'Limpiador Multiusos Citrus 1L',
     price: 12500,
     image: 'https://picsum.photos/seed/prod1/300/300',
+    images: [
+      'https://picsum.photos/seed/prod1/600/600',
+      'https://picsum.photos/seed/prod1b/600/600',
+      'https://picsum.photos/seed/prod1c/600/600',
+    ],
     category: 'Detergentes',
     rating: 4.5,
     sold: 88,
+    description: 'Poderoso limpiador multiusos con aroma cítrico. Elimina grasa y suciedad en una sola pasada sin dejar residuos. Ideal para cocinas, baños y pisos.',
+    sizes: ['1LT', 'GL', 'GF'],
+    priceBySize: { '1LT': 12500, 'GL': 45000, 'GF': 180000 },
+    aromas: ['Cítrico', 'Lavanda', 'Neutro', 'Pino', 'Brisa Marina', 'Manzana', 'Eucalipto', 'Floral'],
   },
   {
     id: 'p2',
@@ -90,68 +104,43 @@ export const catalogProducts: Product[] = [
     price: 38000,
     originalPrice: 45000,
     image: 'https://picsum.photos/seed/prod2/300/300',
+    images: [
+      'https://picsum.photos/seed/prod2/600/600',
+      'https://picsum.photos/seed/prod2b/600/600',
+    ],
     category: 'Ceras',
     badge: 'Oferta',
     rating: 4.7,
     sold: 210,
+    description: 'Cera acrílica de alta resistencia que proporciona un brillo espejo duradero. Protege tus pisos de rayones y tráfico pesado.',
+    sizes: ['1LT', '3.8L', 'GL'],
+    priceBySize: { '1LT': 12000, '3.8L': 38000, 'GL': 42000 },
   },
   {
     id: 'p3',
     name: 'Jabón Líquido de Manos 500ml',
     price: 8900,
     image: 'https://picsum.photos/seed/prod3/300/300',
+    images: ['https://picsum.photos/seed/prod3/600/600'],
     category: 'Aseo',
     rating: 4.3,
     sold: 450,
+    description: 'Jabón suave para manos con glicerina y vitamina E. Protege tu piel mientras elimina bacterias efectivamente.',
+    sizes: ['500ml', '1LT', 'GL'],
+    aromas: ['Frutos Rojos', 'Aloe Vera', 'Neutro'],
   },
   {
     id: 'p4',
     name: 'Limpiavidrios Cristal Clear 750ml',
     price: 15200,
     image: 'https://picsum.photos/seed/prod4/300/300',
+    images: ['https://picsum.photos/seed/prod4/600/600'],
     category: 'Detergentes',
     badge: 'Nuevo',
     rating: 4.6,
     sold: 67,
-  },
-  {
-    id: 'p5',
-    name: 'Aromatizante Ambiente Brisa Marina',
-    price: 11000,
-    image: 'https://picsum.photos/seed/prod5/300/300',
-    category: 'Aromas',
-    rating: 4.4,
-    sold: 130,
-  },
-  {
-    id: 'p6',
-    name: 'Cloro Concentrado 3.8L',
-    price: 18500,
-    originalPrice: 22000,
-    image: 'https://picsum.photos/seed/prod6/300/300',
-    category: 'Desinfectantes',
-    badge: 'Oferta',
-    rating: 4.8,
-    sold: 390,
-  },
-  {
-    id: 'p7',
-    name: 'Papel Higiénico Industrial x48',
-    price: 55000,
-    image: 'https://picsum.photos/seed/prod7/300/300',
-    category: 'Papel',
-    rating: 4.5,
-    sold: 175,
-  },
-  {
-    id: 'p8',
-    name: 'Desengrasante Heavy Duty 2L',
-    price: 24800,
-    image: 'https://picsum.photos/seed/prod8/300/300',
-    category: 'Detergentes',
-    badge: 'Nuevo',
-    rating: 4.7,
-    sold: 92,
+    description: 'Fórmula anti-empañante que deja tus vidrios y espejos impecables y sin vetas por más tiempo.',
+    sizes: ['750ml', '1LT'],
   },
 ];
 
@@ -193,6 +182,10 @@ export const promotionalBanners: PromotionalBanner[] = [
 // ────────────────────────────────────────────────────────────
 // Helpers
 // ────────────────────────────────────────────────────────────
+export const getProductById = (id: string): Product | undefined => {
+  return [...featuredProducts, ...catalogProducts].find((p) => p.id === id);
+};
+
 export const formatPrice = (price: number): string => {
   return new Intl.NumberFormat('es-CO', {
     style: 'currency',
