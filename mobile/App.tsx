@@ -2,7 +2,7 @@ import 'react-native-url-polyfill/auto';
 import "./src/styles/global.css";
 import React, { useState, useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { View, ActivityIndicator } from 'react-native';
+import { View, ActivityIndicator, BackHandler } from 'react-native';
 import { LoginScreen } from './src/modules/auth/pages/LoginScreen';
 import { RegisterScreen } from './src/modules/auth/pages/RegisterScreen';
 import { OfflineScreen } from './src/modules/auth/pages/OfflineScreen';
@@ -33,6 +33,19 @@ export default function App() {
       else setCurrentScreen('login');
     });
   }, []);
+
+  useEffect(() => {
+    const backAction = () => {
+      if (currentScreen === 'details' || currentScreen === 'cart' || currentScreen === 'notifications') {
+        setCurrentScreen('home');
+        return true; // Bloquea el cierre
+      }
+      return false; // Permite el cierre normal
+    };
+
+    const backHandler = BackHandler.addEventListener('hardwareBackPress', backAction);
+    return () => backHandler.remove();
+  }, [currentScreen]);
 
   if (!isConnected) {
     return <OfflineScreen />;
