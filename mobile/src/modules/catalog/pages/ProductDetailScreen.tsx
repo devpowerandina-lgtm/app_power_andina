@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import {
   View,
   Text,
@@ -9,7 +9,7 @@ import {
   Dimensions,
   StatusBar,
   Share,
-  Alert,
+  Animated,
 } from 'react-native';
 import { useCartStore } from '../../cart/store/useCartStore';
 import { 
@@ -20,7 +20,8 @@ import {
   Plus, 
   Star, 
   Info,
-  ShoppingCart 
+  ShoppingCart,
+  CheckCircle 
 } from 'lucide-react-native';
 import Carousel from 'react-native-reanimated-carousel';
 import { 
@@ -47,15 +48,29 @@ export const ProductDetailScreen = ({ productId, onBack }: ProductDetailScreenPr
     (product?.sizes && product.sizes.length > 0 && !selectedSize) || 
     (product?.aromas && product.aromas.length > 0 && !selectedAroma);
 
+  const slideAnim = useRef(new Animated.Value(-100)).current;
+
+  const showToast = () => {
+    Animated.sequence([
+      Animated.timing(slideAnim, {
+        toValue: 60,
+        duration: 300,
+        useNativeDriver: true,
+      }),
+      Animated.delay(2000),
+      Animated.timing(slideAnim, {
+        toValue: -100,
+        duration: 300,
+        useNativeDriver: true,
+      }),
+    ]).start();
+  };
+
   const handleAddToCart = () => {
     if (isAddToCartDisabled) return;
     
     addToCart(product!, selectedSize, selectedAroma, quantity);
-    Alert.alert(
-      '✅ Agregado al carrito',
-      `${product?.name}${selectedSize ? ` · ${selectedSize}` : ''}${selectedAroma ? ` · ${selectedAroma}` : ''} x${quantity}`,
-      [{ text: 'Entendido', style: 'default' }]
-    );
+    showToast();
   };
   
   if (!product) {
@@ -282,6 +297,22 @@ export const ProductDetailScreen = ({ productId, onBack }: ProductDetailScreenPr
           </Text>
         </TouchableOpacity>
       </View>
+
+      {/* ══════ TOAST NOTIFICATION ══════ */}
+      <Animated.View 
+        className="absolute top-0 w-11/12 self-center bg-green-500 rounded-xl p-4 flex-row items-center shadow-lg z-50"
+        style={{ 
+          transform: [{ translateY: slideAnim }],
+          shadowColor: "#000",
+          shadowOffset: { width: 0, height: 4 },
+          shadowOpacity: 0.3,
+          shadowRadius: 4.65,
+          elevation: 8,
+        }}
+      >
+        <CheckCircle color="white" size={24} />
+        <Text className="text-white font-bold ml-3 text-base">Agregado al carrito</Text>
+      </Animated.View>
     </View>
   );
 };
