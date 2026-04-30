@@ -38,12 +38,18 @@ interface ProductDetailScreenProps {
 
 export const ProductDetailScreen = ({ productId, onBack }: ProductDetailScreenProps) => {
   const product = getProductById(productId);
-  const [selectedSize, setSelectedSize] = useState(product?.sizes?.[0] || '');
-  const [selectedAroma, setSelectedAroma] = useState(product?.aromas?.[0] || '');
+  const [selectedSize, setSelectedSize] = useState('');
+  const [selectedAroma, setSelectedAroma] = useState('');
   const [quantity, setQuantity] = useState(1);
   const addToCart = useCartStore((state) => state.addToCart);
 
+  const isAddToCartDisabled = 
+    (product?.sizes && product.sizes.length > 0 && !selectedSize) || 
+    (product?.aromas && product.aromas.length > 0 && !selectedAroma);
+
   const handleAddToCart = () => {
+    if (isAddToCartDisabled) return;
+    
     addToCart(product!, selectedSize, selectedAroma, quantity);
     Alert.alert(
       '✅ Agregado al carrito',
@@ -184,7 +190,7 @@ export const ProductDetailScreen = ({ productId, onBack }: ProductDetailScreenPr
 
           {/* Aroma */}
           {product.aromas && product.aromas.length > 0 && (
-            <View className="mb-6">
+            <View className="mb-6 -mx-5">
               <Text className="text-sm font-bold text-power-darkGreen mb-3 px-5">Aroma</Text>
               <ScrollView 
                 horizontal 
@@ -263,11 +269,16 @@ export const ProductDetailScreen = ({ productId, onBack }: ProductDetailScreenPr
         <TouchableOpacity 
           activeOpacity={0.8}
           onPress={handleAddToCart}
-          className="flex-1 bg-power-blue h-14 rounded-xl flex-row items-center justify-center shadow-lg shadow-power-blue/30"
+          disabled={isAddToCartDisabled}
+          className={`flex-1 h-14 rounded-xl flex-row items-center justify-center shadow-lg ${
+            isAddToCartDisabled ? 'bg-gray-300 shadow-none' : 'bg-power-blue shadow-power-blue/30'
+          }`}
         >
-          <ShoppingCart color="white" size={20} style={{ marginRight: 8 }} />
-          <Text className="text-white font-black text-base uppercase tracking-tight">
-            Agregar al carrito
+          <ShoppingCart color={isAddToCartDisabled ? "#94a3b8" : "white"} size={20} style={{ marginRight: 8 }} />
+          <Text className={`font-black text-base uppercase tracking-tight ${
+            isAddToCartDisabled ? 'text-gray-500' : 'text-white'
+          }`}>
+            {isAddToCartDisabled ? 'Seleccionar opciones' : 'Agregar al carrito'}
           </Text>
         </TouchableOpacity>
       </View>

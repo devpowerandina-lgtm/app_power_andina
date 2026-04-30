@@ -13,7 +13,9 @@ import {
   ListRenderItemInfo,
 } from 'react-native';
 import Carousel from 'react-native-reanimated-carousel';
-import { Search, ShoppingCart, Bell, LogOut, Plus, Star, Zap } from 'lucide-react-native';
+import { Search, ShoppingCart, Bell, LogOut, Star, Zap } from 'lucide-react-native';
+import { ProductCard } from '../components/ProductCard';
+import { FeaturedCard } from '../components/FeaturedCard';
 import { signOut } from '../../auth/services/AuthService';
 import {
   categories,
@@ -36,163 +38,7 @@ const MARGIN = 8; // Correspondiente a mx-2
 // SUB-COMPONENTES
 // ────────────────────────────────────────────────────────────
 
-/** Tarjeta de producto para el grid de 2 columnas */
-const ProductCard = ({ 
-  item, 
-  onAddToCart,
-  onPress
-}: { 
-  item: Product; 
-  onAddToCart: (id: string) => void;
-  onPress: (id: string) => void;
-}) => {
-  const discountPct =
-    item.originalPrice
-      ? Math.round(((item.originalPrice - item.price) / item.originalPrice) * 100)
-      : null;
 
-  return (
-    <TouchableOpacity
-      activeOpacity={0.9}
-      onPress={() => onPress(item.id)}
-      className="bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100"
-      style={{ width: CARD_WIDTH, margin: 4 }}
-    >
-      {/* Imagen + botón flotante */}
-      <View className="relative">
-        <Image
-          source={{ uri: item.image }}
-          className="w-full"
-          style={{ height: CARD_WIDTH * 0.85, resizeMode: 'cover' }}
-        />
-
-        {/* Badge (Nuevo / Oferta) */}
-        {item.badge && (
-          <View
-            className={`absolute top-2 left-2 px-2 py-0.5 rounded-md ${
-              item.badge === 'Oferta' ? 'bg-red-500' : 'bg-power-lightBlue'
-            }`}
-          >
-            <Text className="text-white text-[10px] font-bold">
-              {item.badge}
-            </Text>
-          </View>
-        )}
-
-        {/* Botón de acción rápida — flotante en esquina inferior derecha */}
-        <TouchableOpacity
-          onPress={() => onAddToCart(item.id)}
-          activeOpacity={0.8}
-          className="absolute -bottom-4 right-3 w-9 h-9 rounded-full bg-power-lightBlue items-center justify-center shadow-lg"
-          style={{ elevation: 5 }}
-        >
-          <Plus color="#fff" size={20} strokeWidth={2.5} />
-        </TouchableOpacity>
-      </View>
-
-      {/* Textos */}
-      <View className="p-2.5 pt-5">
-        {/* Estrellas */}
-        <View className="flex-row items-center mb-1">
-          <Star color="#FFD100" size={11} fill="#FFD100" />
-          <Text className="text-[10px] text-gray-500 ml-1">
-            {item.rating} · {item.sold} vendidos
-          </Text>
-        </View>
-
-        {/* Nombre */}
-        <Text
-          numberOfLines={2}
-          className="text-xs text-power-darkGreen font-medium leading-4 mb-1.5 h-8"
-        >
-          {item.name}
-        </Text>
-
-        {/* Precio tachado */}
-        {item.originalPrice && (
-          <Text className="text-[10px] text-gray-400 line-through">
-            {formatPrice(item.originalPrice)}
-          </Text>
-        )}
-
-        {/* Precio principal */}
-        <View className="flex-row items-baseline space-x-1">
-          <Text className="text-base font-extrabold text-power-blue">
-            {formatPrice(item.price)}
-          </Text>
-          {discountPct && (
-            <Text className="text-[10px] text-power-lightGreen font-bold">
-              -{discountPct}%
-            </Text>
-          )}
-        </View>
-      </View>
-    </TouchableOpacity>
-  );
-};
-
-/** Tarjeta de producto destacado (FlatList horizontal) */
-const FeaturedCard = ({ item, onPress }: { item: Product; onPress: (id: string) => void }) => {
-  const discountPct =
-    item.originalPrice
-      ? Math.round(((item.originalPrice - item.price) / item.originalPrice) * 100)
-      : null;
-
-  return (
-    <TouchableOpacity
-      activeOpacity={0.9}
-      onPress={() => onPress(item.id)}
-      className="bg-white rounded-2xl overflow-hidden shadow-md mr-3 border border-gray-50"
-      style={{ width: SCREEN_WIDTH * 0.65 }}
-    >
-      <View className="relative">
-        <Image
-          source={{ uri: item.image }}
-          className="w-full h-32"
-          style={{ resizeMode: 'cover' }}
-        />
-        {item.badge && (
-          <View
-            className={`absolute top-2.5 left-2.5 px-2.5 py-1 rounded-lg ${
-              item.badge === 'Oferta' ? 'bg-red-500' : 'bg-power-lightBlue'
-            }`}
-          >
-            <Text className="text-white text-[11px] font-extrabold uppercase tracking-tight">
-              {item.badge}
-            </Text>
-          </View>
-        )}
-      </View>
-      <View className="p-3">
-        <Text numberOfLines={2} className="text-sm text-power-darkGreen font-semibold mb-1 h-10">
-          {item.name}
-        </Text>
-        <View className="flex-row items-center justify-between mt-1">
-          <View>
-            {item.originalPrice && (
-              <Text className="text-[10px] text-gray-400 line-through">
-                {formatPrice(item.originalPrice)}
-              </Text>
-            )}
-            <View className="flex-row items-center space-x-1.5">
-              <Text className="text-lg font-black text-power-blue">
-                {formatPrice(item.price)}
-              </Text>
-              {discountPct && (
-                <Text className="text-xs text-power-lightGreen font-bold">
-                  -{discountPct}%
-                </Text>
-              )}
-            </View>
-          </View>
-          <TouchableOpacity className="bg-power-yellow p-2 rounded-full shadow-sm">
-            <Plus color="#113321" size={18} strokeWidth={3} />
-          </TouchableOpacity>
-        </View>
-      </View>
-    </TouchableOpacity>
-  );
-};
 
 /** Ícono circular de categoría */
 const CategoryChip = ({ item }: { item: Category }) => (
@@ -316,13 +162,6 @@ export const CatalogScreen = ({
     }
   };
 
-  const handleAddToCart = useCallback((id: string) => {
-    const product = [...featuredProducts, ...catalogProducts].find((p) => p.id === id);
-    if (product) {
-      addToCart(product, product.sizes?.[0] || '', product.aromas?.[0] || '', 1);
-    }
-  }, [addToCart]);
-
   // ── ListHeaderComponent: todo lo que va ANTES del grid ──
   const ListHeader = () => (
     <View>
@@ -431,11 +270,10 @@ export const CatalogScreen = ({
     ({ item }: ListRenderItemInfo<Product>) => (
       <ProductCard 
         item={item} 
-        onAddToCart={handleAddToCart} 
         onPress={onNavigateToDetails} 
       />
     ),
-    [handleAddToCart, onNavigateToDetails]
+    [onNavigateToDetails]
   );
 
   return (
