@@ -71,6 +71,11 @@ export const ProductDetailScreen = ({ productId, onBack }: ProductDetailScreenPr
     
     addToCart(product!, selectedSize, selectedAroma, quantity);
     showToast();
+    
+    // Reiniciar estados para limpiar selección
+    setSelectedSize('');
+    setSelectedAroma('');
+    setQuantity(1);
   };
   
   if (!product) {
