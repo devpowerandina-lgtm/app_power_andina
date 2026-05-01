@@ -252,7 +252,7 @@ export const CatalogScreen = ({
             <Text className="text-sm font-black text-power-darkGreen uppercase tracking-tighter">
               ⭐ Recomendados
             </Text>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => navigateTo('explore')}>
               <Text className="text-xs color-power-lightBlue font-bold">
                 Explorar todo
               </Text>

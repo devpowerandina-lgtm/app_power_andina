@@ -11,6 +11,7 @@ import { ProductDetailScreen } from './src/modules/catalog/pages/ProductDetailSc
 import { CartScreen } from './src/modules/cart/pages/CartScreen';
 import { NotificationScreen } from './src/modules/notifications/pages/NotificationScreen';
 import { CategoryScreen } from './src/modules/catalog/pages/CategoryScreen';
+import { ExploreScreen } from './src/modules/catalog/pages/ExploreScreen';
 import { useNetworkStatus } from './src/shared/hooks/useNetworkStatus';
 import { supabase } from './src/shared/infrastructure/supabase';
 
@@ -121,6 +122,14 @@ export default function App() {
       {currentScreen === 'category' && selectedCategory && (
         <CategoryScreen
           categoryId={selectedCategory}
+          goBack={goBack}
+          navigateTo={navigateTo}
+          setSelectedProductId={setSelectedProductId}
+        />
+      )}
+
+      {currentScreen === 'explore' && (
+        <ExploreScreen
           goBack={goBack}
           navigateTo={navigateTo}
           setSelectedProductId={setSelectedProductId}
