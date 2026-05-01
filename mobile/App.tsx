@@ -117,6 +117,7 @@ export default function App() {
             setSelectedProductId(id);
             setCurrentScreen('details');
           }}
+          onNavigateToCart={() => setCurrentScreen('cart')}
         />
       )}
     </View>

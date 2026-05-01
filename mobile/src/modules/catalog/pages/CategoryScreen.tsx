@@ -27,6 +27,7 @@ interface CategoryScreenProps {
   categoryId: string;
   onBack: () => void;
   onNavigateToDetails: (id: string) => void;
+  onNavigateToCart: () => void;
 }
 
 const CompactProductCard = ({ 
@@ -87,7 +88,8 @@ const CompactProductCard = ({
 export const CategoryScreen = ({ 
   categoryId, 
   onBack, 
-  onNavigateToDetails 
+  onNavigateToDetails,
+  onNavigateToCart 
 }: CategoryScreenProps) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [sortType, setSortType] = useState<'none' | 'price_asc' | 'price_desc' | 'name_asc' | 'rating'>('none');
@@ -164,7 +166,11 @@ export const CategoryScreen = ({
           {category?.name || 'Categoría'}
         </Text>
 
-        <View className="relative">
+        <TouchableOpacity 
+          onPress={onNavigateToCart}
+          className="relative"
+          activeOpacity={0.7}
+        >
           <ShoppingCart color="white" size={24} strokeWidth={2} />
           {cartCount > 0 && (
             <View className="absolute -top-1.5 -right-1.5 bg-power-lightGreen rounded-full w-5 h-5 items-center justify-center border-2 border-power-blue">
@@ -173,7 +179,7 @@ export const CategoryScreen = ({
               </Text>
             </View>
           )}
-        </View>
+        </TouchableOpacity>
       </View>
 
       {/* Barra de Búsqueda */}
