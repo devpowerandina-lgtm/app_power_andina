@@ -30,8 +30,8 @@ export interface Product {
 export interface Brand {
   id: string;
   name: string;
-  logo_url?: string;
-  banner_url?: string;
+  logo_url?: any;
+  banner_url?: any;
 }
 
 // ────────────────────────────────────────────────────────────
@@ -209,33 +209,33 @@ export const promotionalBanners: PromotionalBanner[] = [
 export const mockBrands: Brand[] = [
   { 
     id: 'br1', 
-    name: 'Luinno', 
-    logo_url: 'https://picsum.photos/seed/luinno/200/200',
-    banner_url: 'https://picsum.photos/seed/luinno_banner/800/400'
+    name: 'Fantasia', 
+    logo_url: require('../../../../assets/images/brands/logos/logo-fantasia.png'),
+    banner_url: require('../../../../assets/images/brands/banners/banner-fantasia.jpg')
   },
   { 
     id: 'br2', 
-    name: 'Wind', 
-    logo_url: 'https://picsum.photos/seed/wind/200/200',
-    banner_url: 'https://picsum.photos/seed/wind_banner/800/400'
+    name: 'Good Morning', 
+    logo_url: require('../../../../assets/images/brands/logos/logo-good-morning.png'),
+    banner_url: require('../../../../assets/images/brands/banners/banner-good-morning.jpg')
   },
   { 
     id: 'br3', 
-    name: 'Fantasia', 
-    logo_url: 'https://picsum.photos/seed/fantasia/200/200',
-    banner_url: 'https://picsum.photos/seed/fantasia_banner/800/400'
+    name: 'Winnd', 
+    logo_url: require('../../../../assets/images/brands/logos/logo-winnd.png'),
+    banner_url: require('../../../../assets/images/brands/banners/banner-winnd.jpg')
   },
   { 
     id: 'br4', 
-    name: 'Good Morning', 
-    logo_url: 'https://picsum.photos/seed/gm/200/200',
-    banner_url: 'https://picsum.photos/seed/gm_banner/800/400'
+    name: 'Wind', 
+    logo_url: require('../../../../assets/images/brands/logos/logo-wind.png'),
+    banner_url: require('../../../../assets/images/brands/banners/banner-wind.jpg')
   },
   { 
     id: 'br5', 
-    name: 'Eco Amigable', 
-    logo_url: 'https://picsum.photos/seed/eco/200/200',
-    banner_url: 'https://picsum.photos/seed/eco_banner/800/400'
+    name: "Q' Blanqueador", 
+    logo_url: require('../../../../assets/images/brands/logos/logo-q-blanqueador.png'),
+    banner_url: require('../../../../assets/images/brands/banners/banner-q-blanqueador.jpg')
   },
 ];
 
