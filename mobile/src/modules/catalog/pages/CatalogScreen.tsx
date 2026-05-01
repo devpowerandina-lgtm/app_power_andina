@@ -65,15 +65,21 @@ const CategoryChip = ({ item, onPress }: { item: Category; onPress: (id: string)
 );
 
 /** Tarjeta cuadrada de marca */
-const BrandCard = ({ item }: { item: Brand }) => (
+const BrandCard = ({ 
+  item, 
+  onPress 
+}: { 
+  item: Brand; 
+  onPress: (id: string) => void;
+}) => (
   <TouchableOpacity
     activeOpacity={0.8}
-    onPress={() => console.log('Brand ID:', item.id)}
+    onPress={() => onPress(item.id)}
     className="w-24 h-24 bg-white rounded-2xl shadow-sm mx-2 items-center justify-center border border-gray-100 overflow-hidden"
   >
-    {item.image_url ? (
+    {item.logo_url ? (
       <Image
-        source={{ uri: item.image_url }}
+        source={{ uri: item.logo_url }}
         className="w-full h-full"
         resizeMode="cover"
       />
@@ -197,11 +203,13 @@ export const CatalogScreen = ({
   goBack,
   setSelectedProductId,
   setSelectedCategory,
+  setSelectedBrand,
 }: { 
   navigateTo: (screen: string) => void;
   goBack: () => void;
   setSelectedProductId: (id: string) => void;
   setSelectedCategory: (id: string) => void;
+  setSelectedBrand: (id: string) => void;
 }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const addToCart = useCartStore((state) => state.addToCart);
@@ -308,7 +316,14 @@ export const CatalogScreen = ({
             contentContainerStyle={{ paddingHorizontal: 8 }}
           >
             {getBrands().map((brand) => (
-              <BrandCard key={brand.id} item={brand} />
+              <BrandCard 
+                key={brand.id} 
+                item={brand} 
+                onPress={(id) => {
+                  setSelectedBrand(id);
+                  navigateTo('brand');
+                }}
+              />
             ))}
           </ScrollView>
         </View>

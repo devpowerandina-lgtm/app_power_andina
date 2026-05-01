@@ -12,6 +12,7 @@ import { CartScreen } from './src/modules/cart/pages/CartScreen';
 import { NotificationScreen } from './src/modules/notifications/pages/NotificationScreen';
 import { CategoryScreen } from './src/modules/catalog/pages/CategoryScreen';
 import { ExploreScreen } from './src/modules/catalog/pages/ExploreScreen';
+import { BrandScreen } from './src/modules/catalog/pages/BrandScreen';
 import { useNetworkStatus } from './src/shared/hooks/useNetworkStatus';
 import { supabase } from './src/shared/infrastructure/supabase';
 
@@ -22,6 +23,7 @@ export default function App() {
   
   const [selectedProductId, setSelectedProductId] = useState<string | null>(null);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [selectedBrand, setSelectedBrand] = useState<string | null>(null);
   const [session, setSession] = useState<any>(null);
   const [loading, setLoading] = useState(true);
 
@@ -101,6 +103,7 @@ export default function App() {
           goBack={goBack}
           setSelectedProductId={setSelectedProductId}
           setSelectedCategory={setSelectedCategory}
+          setSelectedBrand={setSelectedBrand}
         />
       )}
 
@@ -130,6 +133,15 @@ export default function App() {
 
       {currentScreen === 'explore' && (
         <ExploreScreen
+          goBack={goBack}
+          navigateTo={navigateTo}
+          setSelectedProductId={setSelectedProductId}
+        />
+      )}
+
+      {currentScreen === 'brand' && selectedBrand && (
+        <BrandScreen
+          brandId={selectedBrand}
           goBack={goBack}
           navigateTo={navigateTo}
           setSelectedProductId={setSelectedProductId}

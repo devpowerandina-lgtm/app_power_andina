@@ -24,12 +24,14 @@ export interface Product {
   sizes?: string[];
   aromas?: string[];
   priceBySize?: Record<string, number>;
+  brandId?: string;
 }
 
 export interface Brand {
   id: string;
   name: string;
-  image_url?: string;
+  logo_url?: string;
+  banner_url?: string;
 }
 
 // ────────────────────────────────────────────────────────────
@@ -58,6 +60,7 @@ export const featuredProducts: Product[] = [
     badge: 'Oferta',
     rating: 4.8,
     sold: 320,
+    brandId: 'br1',
   },
   {
     id: 'f2',
@@ -68,6 +71,7 @@ export const featuredProducts: Product[] = [
     badge: 'Nuevo',
     rating: 4.6,
     sold: 145,
+    brandId: 'br2',
   },
   {
     id: 'f3',
@@ -79,6 +83,7 @@ export const featuredProducts: Product[] = [
     badge: 'Oferta',
     rating: 4.9,
     sold: 512,
+    brandId: 'br3',
   },
 ];
 
@@ -103,6 +108,7 @@ export const catalogProducts: Product[] = [
     sizes: ['1LT', 'GL', 'GF'],
     priceBySize: { '1LT': 12500, 'GL': 45000, 'GF': 180000 },
     aromas: ['Cítrico', 'Lavanda', 'Neutro', 'Pino', 'Brisa Marina', 'Manzana', 'Eucalipto', 'Floral'],
+    brandId: 'br1',
   },
   {
     id: 'p2',
@@ -121,6 +127,7 @@ export const catalogProducts: Product[] = [
     description: 'Cera acrílica de alta resistencia que proporciona un brillo espejo duradero. Protege tus pisos de rayones y tráfico pesado.',
     sizes: ['1LT', '3.8L', 'GL'],
     priceBySize: { '1LT': 12000, '3.8L': 38000, 'GL': 42000 },
+    brandId: 'br2',
   },
   {
     id: 'p3',
@@ -134,6 +141,7 @@ export const catalogProducts: Product[] = [
     description: 'Jabón suave para manos con glicerina y vitamina E. Protege tu piel mientras elimina bacterias efectivamente.',
     sizes: ['500ml', '1LT', 'GL'],
     aromas: ['Frutos Rojos', 'Aloe Vera', 'Neutro'],
+    brandId: 'br3',
   },
   {
     id: 'p4',
@@ -147,6 +155,7 @@ export const catalogProducts: Product[] = [
     sold: 67,
     description: 'Fórmula anti-empañante que deja tus vidrios y espejos impecables y sin vetas por más tiempo.',
     sizes: ['750ml', '1LT'],
+    brandId: 'br4',
   },
 ];
 
@@ -198,11 +207,36 @@ export const promotionalBanners: PromotionalBanner[] = [
 // NUESTRAS MARCAS
 // ────────────────────────────────────────────────────────────
 export const mockBrands: Brand[] = [
-  { id: 'br1', name: 'Luinno', image_url: 'https://picsum.photos/seed/luinno/200/200' },
-  { id: 'br2', name: 'Wind', image_url: 'https://picsum.photos/seed/wind/200/200' },
-  { id: 'br3', name: 'Fantasia', image_url: 'https://picsum.photos/seed/fantasia/200/200' },
-  { id: 'br4', name: 'Good Morning', image_url: 'https://picsum.photos/seed/gm/200/200' },
-  { id: 'br5', name: 'Eco Amigable', image_url: 'https://picsum.photos/seed/eco/200/200' },
+  { 
+    id: 'br1', 
+    name: 'Luinno', 
+    logo_url: 'https://picsum.photos/seed/luinno/200/200',
+    banner_url: 'https://picsum.photos/seed/luinno_banner/800/400'
+  },
+  { 
+    id: 'br2', 
+    name: 'Wind', 
+    logo_url: 'https://picsum.photos/seed/wind/200/200',
+    banner_url: 'https://picsum.photos/seed/wind_banner/800/400'
+  },
+  { 
+    id: 'br3', 
+    name: 'Fantasia', 
+    logo_url: 'https://picsum.photos/seed/fantasia/200/200',
+    banner_url: 'https://picsum.photos/seed/fantasia_banner/800/400'
+  },
+  { 
+    id: 'br4', 
+    name: 'Good Morning', 
+    logo_url: 'https://picsum.photos/seed/gm/200/200',
+    banner_url: 'https://picsum.photos/seed/gm_banner/800/400'
+  },
+  { 
+    id: 'br5', 
+    name: 'Eco Amigable', 
+    logo_url: 'https://picsum.photos/seed/eco/200/200',
+    banner_url: 'https://picsum.photos/seed/eco_banner/800/400'
+  },
 ];
 
 // ────────────────────────────────────────────────────────────
@@ -243,6 +277,7 @@ export const getExploreProducts = (): Product[] => {
       rating: 4.9,
       sold: 120,
       description: 'Todo lo que necesitas para empezar a limpiar tu hogar con la calidad de Power Andina.',
+      brandId: 'br1',
     },
     {
       id: 'e2',
@@ -253,6 +288,7 @@ export const getExploreProducts = (): Product[] => {
       badge: '✨ NUEVO',
       rating: 4.7,
       sold: 85,
+      brandId: 'br2',
     },
     {
       id: 'e3',
@@ -264,6 +300,7 @@ export const getExploreProducts = (): Product[] => {
       badge: '🔥 OFERTA',
       rating: 4.8,
       sold: 300,
+      brandId: 'br3',
     },
     {
       id: 'e4',
@@ -274,6 +311,7 @@ export const getExploreProducts = (): Product[] => {
       badge: '✨ NUEVO',
       rating: 4.6,
       sold: 42,
+      brandId: 'br4',
     },
     {
       id: 'e5',
@@ -285,6 +323,7 @@ export const getExploreProducts = (): Product[] => {
       badge: '🔥 15% OFF',
       rating: 4.5,
       sold: 156,
+      brandId: 'br5',
     },
     {
       id: 'e6',
@@ -295,6 +334,7 @@ export const getExploreProducts = (): Product[] => {
       badge: '✨ NUEVO',
       rating: 4.4,
       sold: 98,
+      brandId: 'br1',
     },
     {
       id: 'e7',
@@ -305,6 +345,7 @@ export const getExploreProducts = (): Product[] => {
       badge: '✨ TOP',
       rating: 4.9,
       sold: 210,
+      brandId: 'br2',
     },
     {
       id: 'e8',
@@ -316,8 +357,18 @@ export const getExploreProducts = (): Product[] => {
       badge: '🔥 PROMO',
       rating: 4.7,
       sold: 75,
+      brandId: 'br3',
     },
   ];
+};
+
+export const getProductsByBrand = (brandId: string): Product[] => {
+  const allProducts = [...featuredProducts, ...catalogProducts, ...getExploreProducts()];
+  return allProducts.filter((p) => p.brandId === brandId);
+};
+
+export const getBrandById = (brandId: string): Brand | undefined => {
+  return mockBrands.find((b) => b.id === brandId);
 };
 
 export const getBrands = (): Brand[] => {
