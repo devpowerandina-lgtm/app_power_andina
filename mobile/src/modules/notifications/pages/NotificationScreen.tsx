@@ -18,7 +18,7 @@ import {
 } from 'lucide-react-native';
 
 interface NotificationScreenProps {
-  onBack: () => void;
+  goBack: () => void;
 }
 
 interface Promotion {
@@ -62,7 +62,7 @@ const PromotionCard = ({ item }: { item: Promotion }) => (
   </View>
 );
 
-export const NotificationScreen = ({ onBack }: NotificationScreenProps) => {
+export const NotificationScreen = ({ goBack }: NotificationScreenProps) => {
   const [activeTab, setActiveTab] = useState<'generales' | 'promociones'>('generales');
 
   // Renderizado dinámico del Estado Vacío
@@ -83,7 +83,7 @@ export const NotificationScreen = ({ onBack }: NotificationScreenProps) => {
             ¡Aprovecha para descubrir productos increíbles!
           </Text>
           <TouchableOpacity 
-            onPress={onBack}
+            onPress={goBack}
             className="mt-10 bg-power-blue/5 px-8 py-3 rounded-full border border-power-blue/10"
           >
             <Text className="text-power-blue font-bold">Volver al inicio</Text>
@@ -119,7 +119,7 @@ export const NotificationScreen = ({ onBack }: NotificationScreenProps) => {
         }}
       >
         <View className="flex-row items-center justify-between">
-          <TouchableOpacity onPress={onBack} activeOpacity={0.7} className="p-1">
+          <TouchableOpacity onPress={goBack} activeOpacity={0.7} className="p-1">
             <ArrowLeft color="#fff" size={26} strokeWidth={2.5} />
           </TouchableOpacity>
           

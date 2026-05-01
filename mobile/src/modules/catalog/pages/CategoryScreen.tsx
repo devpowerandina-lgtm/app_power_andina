@@ -25,9 +25,9 @@ const COLUMN_WIDTH = (SCREEN_WIDTH - 48) / 2;
 
 interface CategoryScreenProps {
   categoryId: string;
-  onBack: () => void;
-  onNavigateToDetails: (id: string) => void;
-  onNavigateToCart: () => void;
+  navigateTo: (screen: string) => void;
+  goBack: () => void;
+  setSelectedProductId: (id: string) => void;
 }
 
 const CompactProductCard = ({ 
@@ -87,9 +87,9 @@ const CompactProductCard = ({
 
 export const CategoryScreen = ({ 
   categoryId, 
-  onBack, 
-  onNavigateToDetails,
-  onNavigateToCart 
+  navigateTo, 
+  goBack, 
+  setSelectedProductId 
 }: CategoryScreenProps) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [sortType, setSortType] = useState<'none' | 'price_asc' | 'price_desc' | 'name_asc' | 'rating'>('none');
@@ -156,7 +156,7 @@ export const CategoryScreen = ({
         style={{ paddingTop: StatusBar.currentHeight ? StatusBar.currentHeight + 10 : 50 }}
       >
         <TouchableOpacity 
-          onPress={onBack}
+          onPress={goBack}
           className="p-2 -ml-2"
         >
           <ArrowLeft color="white" size={24} strokeWidth={2.5} />
@@ -167,7 +167,7 @@ export const CategoryScreen = ({
         </Text>
 
         <TouchableOpacity 
-          onPress={onNavigateToCart}
+          onPress={() => navigateTo('cart')}
           className="relative"
           activeOpacity={0.7}
         >
@@ -214,7 +214,10 @@ export const CategoryScreen = ({
         keyExtractor={(item) => item.id}
         numColumns={2}
         renderItem={({ item }) => (
-          <CompactProductCard item={item} onPress={onNavigateToDetails} />
+          <CompactProductCard item={item} onPress={(id) => {
+            setSelectedProductId(id);
+            navigateTo('details');
+          }} />
         )}
         contentContainerStyle={{ 
           padding: 16, 

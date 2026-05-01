@@ -19,7 +19,7 @@ import { useCartStore, CartItem } from '../store/useCartStore';
 import { formatPrice } from '../../catalog/services/ProductService';
 
 interface CartScreenProps {
-  onBack: () => void;
+  goBack: () => void;
   onCheckout?: () => void;
 }
 
@@ -210,7 +210,7 @@ const CartItemCard = ({
 // ────────────────────────────────────────────────────────────
 // COMPONENTE: Estado vacío
 // ────────────────────────────────────────────────────────────
-const EmptyCart = ({ onBack }: { onBack: () => void }) => (
+const EmptyCart = ({ goBack }: { goBack: () => void }) => (
   <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', paddingHorizontal: 32 }}>
     <View
       style={{
@@ -248,7 +248,7 @@ const EmptyCart = ({ onBack }: { onBack: () => void }) => (
       Agrega productos desde el catálogo para comenzar tu pedido
     </Text>
     <TouchableOpacity
-      onPress={onBack}
+      onPress={goBack}
       style={{
         backgroundColor: '#0284c7',
         paddingHorizontal: 32,
@@ -266,7 +266,7 @@ const EmptyCart = ({ onBack }: { onBack: () => void }) => (
 // ────────────────────────────────────────────────────────────
 // PANTALLA PRINCIPAL
 // ────────────────────────────────────────────────────────────
-export const CartScreen = ({ onBack, onCheckout }: CartScreenProps) => {
+export const CartScreen = ({ goBack, onCheckout }: CartScreenProps) => {
   const { cartItems, removeFromCart, updateQuantity, totalItems, totalPrice } = useCartStore();
   const total = totalItems();
   const subtotal = totalPrice();
@@ -303,7 +303,7 @@ export const CartScreen = ({ onBack, onCheckout }: CartScreenProps) => {
         }}
       >
         <TouchableOpacity
-          onPress={onBack}
+          onPress={goBack}
           style={{
             width: 40,
             height: 40,
@@ -331,7 +331,7 @@ export const CartScreen = ({ onBack, onCheckout }: CartScreenProps) => {
 
       {/* ══════ CONTENIDO PRINCIPAL ══════ */}
       {cartItems.length === 0 ? (
-        <EmptyCart onBack={onBack} />
+        <EmptyCart goBack={goBack} />
       ) : (
         <>
           <FlatList

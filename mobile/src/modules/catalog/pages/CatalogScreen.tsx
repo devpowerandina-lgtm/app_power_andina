@@ -143,15 +143,15 @@ const PromotionalCarousel = () => {
 // PANTALLA PRINCIPAL
 // ────────────────────────────────────────────────────────────
 export const CatalogScreen = ({ 
-  onNavigateToNotifications,
-  onNavigateToDetails,
-  onNavigateToCart,
-  onNavigateToCategory,
+  navigateTo,
+  goBack,
+  setSelectedProductId,
+  setSelectedCategory,
 }: { 
-  onNavigateToNotifications: () => void;
-  onNavigateToDetails: (id: string) => void;
-  onNavigateToCart: () => void;
-  onNavigateToCategory: (id: string) => void;
+  navigateTo: (screen: string) => void;
+  goBack: () => void;
+  setSelectedProductId: (id: string) => void;
+  setSelectedCategory: (id: string) => void;
 }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const addToCart = useCartStore((state) => state.addToCart);
@@ -185,7 +185,7 @@ export const CatalogScreen = ({
           </View>
           <View className="flex-row items-center space-x-3">
             {/* Notificaciones */}
-            <TouchableOpacity onPress={onNavigateToNotifications}>
+            <TouchableOpacity onPress={() => navigateTo('notifications')}>
               <Bell color="#fff" size={22} strokeWidth={2} />
             </TouchableOpacity>
             {/* Logout */}
@@ -228,7 +228,10 @@ export const CatalogScreen = ({
             <CategoryChip 
               key={cat.id} 
               item={cat} 
-              onPress={onNavigateToCategory}
+              onPress={(id) => {
+                setSelectedCategory(id);
+                navigateTo('category');
+              }}
             />
           ))}
         </ScrollView>
@@ -253,7 +256,10 @@ export const CatalogScreen = ({
           horizontal
           showsHorizontalScrollIndicator={false}
           contentContainerStyle={{ paddingHorizontal: 16 }}
-          renderItem={({ item }) => <FeaturedCard item={item} onPress={onNavigateToDetails} />}
+          renderItem={({ item }) => <FeaturedCard item={item} onPress={(id) => {
+            setSelectedProductId(id);
+            navigateTo('details');
+          }} />}
           scrollEnabled
           nestedScrollEnabled
         />
@@ -277,10 +283,13 @@ export const CatalogScreen = ({
     ({ item }: ListRenderItemInfo<Product>) => (
       <ProductCard 
         item={item} 
-        onPress={onNavigateToDetails} 
+        onPress={(id) => {
+          setSelectedProductId(id);
+          navigateTo('details');
+        }} 
       />
     ),
-    [onNavigateToDetails]
+    [navigateTo, setSelectedProductId]
   );
 
   return (
@@ -308,7 +317,7 @@ export const CatalogScreen = ({
       >
         <TouchableOpacity
           activeOpacity={0.9}
-          onPress={onNavigateToCart}
+          onPress={() => navigateTo('cart')}
           className="bg-power-blue rounded-full p-5 shadow-lg border border-white/20 items-center justify-center"
           style={{ elevation: 5 }}
         >

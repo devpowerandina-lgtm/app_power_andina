@@ -34,10 +34,10 @@ const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
 interface ProductDetailScreenProps {
   productId: string;
-  onBack: () => void;
+  goBack: () => void;
 }
 
-export const ProductDetailScreen = ({ productId, onBack }: ProductDetailScreenProps) => {
+export const ProductDetailScreen = ({ productId, goBack }: ProductDetailScreenProps) => {
   const product = getProductById(productId);
   const [selectedSize, setSelectedSize] = useState('');
   const [selectedAroma, setSelectedAroma] = useState('');
@@ -82,7 +82,7 @@ export const ProductDetailScreen = ({ productId, onBack }: ProductDetailScreenPr
     return (
       <View className="flex-1 items-center justify-center bg-white">
         <Text>Producto no encontrado</Text>
-        <TouchableOpacity onPress={onBack} className="mt-4 bg-power-blue px-6 py-2 rounded-full">
+        <TouchableOpacity onPress={goBack} className="mt-4 bg-power-blue px-6 py-2 rounded-full">
           <Text className="text-white font-bold">Volver</Text>
         </TouchableOpacity>
       </View>
@@ -116,7 +116,7 @@ export const ProductDetailScreen = ({ productId, onBack }: ProductDetailScreenPr
       {/* ══════ HEADER TRANSPARENTE ══════ */}
       <View className="absolute top-0 left-0 right-0 z-50 flex-row justify-between items-center px-4" style={{ paddingTop: 50 }}>
         <TouchableOpacity 
-          onPress={onBack}
+          onPress={goBack}
           className="w-10 h-10 rounded-full bg-black/30 items-center justify-center"
         >
           <ChevronLeft color="white" size={24} strokeWidth={2.5} />

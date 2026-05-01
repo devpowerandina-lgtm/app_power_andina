@@ -16,30 +16,45 @@ import { supabase } from './src/shared/infrastructure/supabase';
 
 export default function App() {
   const { isConnected } = useNetworkStatus();
-  const [currentScreen, setCurrentScreen] = useState<'login' | 'register' | 'home' | 'notifications' | 'details' | 'cart' | 'category'>('login');
+  const [navigationStack, setNavigationStack] = useState<string[]>(['login']);
+  const currentScreen = navigationStack[navigationStack.length - 1];
+  
   const [selectedProductId, setSelectedProductId] = useState<string | null>(null);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [session, setSession] = useState<any>(null);
   const [loading, setLoading] = useState(true);
 
+  const navigateTo = (screen: string) => {
+    setNavigationStack(prev => [...prev, screen]);
+  };
+
+  const goBack = () => {
+    setNavigationStack(prev => {
+      if (prev.length > 1) {
+        return prev.slice(0, -1);
+      }
+      return prev;
+    });
+  };
+
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session);
-      if (session) setCurrentScreen('home');
+      if (session) setNavigationStack(['home']);
       setLoading(false);
     });
 
     supabase.auth.onAuthStateChange((_event, session) => {
       setSession(session);
-      if (session) setCurrentScreen('home');
-      else setCurrentScreen('login');
+      if (session) setNavigationStack(['home']);
+      else setNavigationStack(['login']);
     });
   }, []);
 
   useEffect(() => {
     const backAction = () => {
-      if (currentScreen === 'details' || currentScreen === 'cart' || currentScreen === 'notifications' || currentScreen === 'category') {
-        setCurrentScreen('home');
+      if (navigationStack.length > 1) {
+        goBack();
         return true; // Bloquea el cierre
       }
       return false; // Permite el cierre normal
@@ -47,7 +62,7 @@ export default function App() {
 
     const backHandler = BackHandler.addEventListener('hardwareBackPress', backAction);
     return () => backHandler.remove();
-  }, [currentScreen]);
+  }, [navigationStack]);
 
   if (!isConnected) {
     return <OfflineScreen />;
@@ -67,57 +82,48 @@ export default function App() {
 
       {currentScreen === 'login' && (
         <LoginScreen
-          onNavigateToRegister={() => setCurrentScreen('register')}
-          onLoginSuccess={() => setCurrentScreen('home')}
+          onNavigateToRegister={() => navigateTo('register')}
+          onLoginSuccess={() => setNavigationStack(['home'])}
         />
       )}
 
       {currentScreen === 'register' && (
         <RegisterScreen
-          onNavigateToLogin={() => setCurrentScreen('login')}
-          onRegisterSuccess={() => setCurrentScreen('home')}
+          onNavigateToLogin={() => navigateTo('login')}
+          onRegisterSuccess={() => setNavigationStack(['home'])}
         />
       )}
 
       {currentScreen === 'home' && (
         <CatalogScreen
-          onNavigateToNotifications={() => setCurrentScreen('notifications')}
-          onNavigateToDetails={(id) => {
-            setSelectedProductId(id);
-            setCurrentScreen('details');
-          }}
-          onNavigateToCart={() => setCurrentScreen('cart')}
-          onNavigateToCategory={(catId) => {
-            setSelectedCategory(catId);
-            setCurrentScreen('category');
-          }}
+          navigateTo={navigateTo}
+          goBack={goBack}
+          setSelectedProductId={setSelectedProductId}
+          setSelectedCategory={setSelectedCategory}
         />
       )}
 
       {currentScreen === 'notifications' && (
-        <NotificationScreen onBack={() => setCurrentScreen('home')} />
+        <NotificationScreen goBack={goBack} />
       )}
 
       {currentScreen === 'details' && selectedProductId && (
         <ProductDetailScreen
           productId={selectedProductId}
-          onBack={() => setCurrentScreen('home')}
+          goBack={goBack}
         />
       )}
 
       {currentScreen === 'cart' && (
-        <CartScreen onBack={() => setCurrentScreen('home')} />
+        <CartScreen goBack={goBack} />
       )}
 
       {currentScreen === 'category' && selectedCategory && (
         <CategoryScreen
           categoryId={selectedCategory}
-          onBack={() => setCurrentScreen('home')}
-          onNavigateToDetails={(id) => {
-            setSelectedProductId(id);
-            setCurrentScreen('details');
-          }}
-          onNavigateToCart={() => setCurrentScreen('cart')}
+          goBack={goBack}
+          navigateTo={navigateTo}
+          setSelectedProductId={setSelectedProductId}
         />
       )}
     </View>
