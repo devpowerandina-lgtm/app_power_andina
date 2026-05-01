@@ -63,76 +63,102 @@ const CategoryChip = ({ item, onPress }: { item: Category; onPress: (id: string)
 );
 
 /** Contenido del Banner (Separado para reutilización) */
-const PromotionBannerContent = ({ item }: { item: PromotionalBanner }) => {
-  const isYellow = item.bgColor === 'bg-power-yellow';
-  const textColor = isYellow ? 'text-power-darkGreen' : 'text-white';
-  const subtitleColor = isYellow ? 'text-power-darkGreen/70' : 'text-power-lightGreen';
-  const zapColor = isYellow ? '#113321' : '#FFD100';
-
+/** Contenido del Banner Premium e Interactivo */
+const PromotionBannerContent = ({ 
+  item, 
+  onPress 
+}: { 
+  item: PromotionalBanner;
+  onPress: () => void;
+}) => {
   return (
-    <View className={`rounded-2xl overflow-hidden h-full ${item.bgColor} flex-row items-center px-5 shadow-lg w-full`}>
-      {/* Imagen de fondo del banner */}
+    <TouchableOpacity 
+      activeOpacity={0.9}
+      onPress={onPress}
+      className="rounded-2xl overflow-hidden h-full shadow-xl"
+    >
+      {/* Imagen de fondo 16:9 resizeMode="cover" */}
       {item.image && (
         <Image
           source={{ uri: item.image }}
           className="absolute inset-0 w-full h-full"
-          style={{ resizeMode: 'cover', opacity: 0.6 }}
+          style={{ resizeMode: 'cover' }}
         />
       )}
       
-      {/* Overlay oscuro para legibilidad si hay imagen */}
-      {item.image && (
-        <View className="absolute inset-0 bg-black/20" />
-      )}
+      {/* Gradiente Oscuro Overlay */}
+      <View className="absolute inset-0 bg-black/30 rounded-2xl" />
 
-      {/* Círculos decorativos de fondo */}
-      <View 
-        className={`absolute -right-8 -top-8 w-40 h-40 rounded-full ${isYellow ? 'bg-power-blue' : 'bg-power-lightGreen'} opacity-20`} 
-      />
-      <View className="absolute right-5 -bottom-10 w-28 h-28 rounded-full bg-white opacity-10" />
-
-      {/* Texto banner */}
-      <View className="flex-1 relative z-10">
-        <View className={`${isYellow ? 'bg-power-blue' : 'bg-power-yellow'} rounded-md px-2 py-0.5 self-start mb-1.5 shadow-sm`}>
-          <Text className={`${isYellow ? 'text-white' : 'text-power-darkGreen'} text-[10px] font-black tracking-widest`}>
-            🔥 EXCLUSIVO
+      {/* Badge Exclusivo (Arriba Izquierda) - Efecto Cristal */}
+      {item.badgeText && (
+        <View className="absolute top-3 left-3 bg-white/20 backdrop-blur-md border border-white/30 rounded-full px-3 py-1">
+          <Text className="text-[10px] text-white font-bold uppercase tracking-wider">
+            {item.badgeText}
           </Text>
         </View>
-        <Text className={`${textColor} text-2xl font-black leading-tight mb-1`}>
+      )}
+
+      {/* Textos Promocionales (Abajo Izquierda) */}
+      <View className="absolute bottom-4 left-4 right-24">
+        <Text className="text-white text-xl font-bold leading-tight" numberOfLines={2}>
           {item.title}
         </Text>
-        <Text className={`${subtitleColor} text-base font-bold`}>
+        <Text className="text-white/80 text-sm font-medium mt-0.5" numberOfLines={1}>
           {item.subtitle}
         </Text>
       </View>
 
-      {/* Ícono decorativo */}
-      <View className="w-16 h-16 rounded-full bg-white/20 items-center justify-center ml-3 relative z-10">
-        <Zap color={zapColor} size={32} fill={zapColor} />
+      {/* Botón de Acción (Abajo Derecha) */}
+      <View className="bg-power-lightGreen px-4 py-2 rounded-full absolute bottom-4 right-4 shadow-md">
+        <Text className="text-white text-[11px] font-semibold">
+          Ver oferta
+        </Text>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
 /** Carrusel de Promociones con Loop Infinito Real */
-const PromotionalCarousel = () => {
+/** Carrusel de Promociones con Loop Infinito Real */
+const PromotionalCarousel = ({ 
+  navigateTo, 
+  setSelectedProductId, 
+  setSelectedCategory 
+}: { 
+  navigateTo: (screen: string) => void;
+  setSelectedProductId: (id: string) => void;
+  setSelectedCategory: (id: string) => void;
+}) => {
+  const handlePress = (item: PromotionalBanner) => {
+    if (item.targetProductId) {
+      setSelectedProductId(item.targetProductId);
+      navigateTo('details');
+    } else if (item.targetCategoryId) {
+      setSelectedCategory(item.targetCategoryId);
+      navigateTo('category');
+    }
+  };
+
   return (
     <Carousel
       loop
       width={SCREEN_WIDTH}
-      height={SCREEN_WIDTH * 0.60}
+      height={SCREEN_WIDTH * 0.56} // Proporción 16:9 aprox
       autoPlay={true}
-      autoPlayInterval={3000}
+      autoPlayInterval={4000}
       data={promotionalBanners}
       scrollAnimationDuration={1000}
       mode="parallax"
       modeConfig={{
-        parallaxScrollingScale: 0.9,
-        parallaxScrollingOffset: 50,
+        parallaxScrollingScale: 0.92,
+        parallaxScrollingOffset: 45,
       }}
       renderItem={({ item }) => (
-        <View className="px-4">
-          <PromotionBannerContent item={item} />
+        <View className="px-4 h-full">
+          <PromotionBannerContent 
+            item={item} 
+            onPress={() => handlePress(item)} 
+          />
         </View>
       )}
     />
@@ -190,7 +216,11 @@ export const CatalogScreen = ({
       <View>
         {/* ══════ CARRUSEL PROMOCIONAL ══════ */}
         <View className="mt-5">
-          <PromotionalCarousel />
+          <PromotionalCarousel 
+            navigateTo={navigateTo}
+            setSelectedProductId={setSelectedProductId}
+            setSelectedCategory={setSelectedCategory}
+          />
         </View>
 
         {/* ══════ CATEGORÍAS (Quick Access) ══════ */}

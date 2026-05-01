@@ -150,6 +150,9 @@ export interface PromotionalBanner {
   subtitle: string;
   bgColor: string;
   image?: string;
+  targetProductId?: string;
+  targetCategoryId?: string;
+  badgeText?: string;
 }
 
 // ────────────────────────────────────────────────────────────
@@ -162,6 +165,8 @@ export const promotionalBanners: PromotionalBanner[] = [
     subtitle: 'Limpia profundamente con Power Andina',
     bgColor: 'bg-power-blue',
     image: 'https://picsum.photos/seed/banner1/800/450',
+    targetCategoryId: 'c1',
+    badgeText: 'Oferta Relámpago ⚡',
   },
   {
     id: 'b2',
@@ -169,6 +174,8 @@ export const promotionalBanners: PromotionalBanner[] = [
     subtitle: 'Fragancias que perduran por más tiempo',
     bgColor: 'bg-power-lightGreen',
     image: 'https://picsum.photos/seed/banner2/800/450',
+    targetProductId: 'p1',
+    badgeText: 'Exclusivo App',
   },
   {
     id: 'b3',
@@ -176,6 +183,8 @@ export const promotionalBanners: PromotionalBanner[] = [
     subtitle: 'Todo lo que necesitas en un solo pack',
     bgColor: 'bg-power-yellow',
     image: 'https://picsum.photos/seed/banner3/800/450',
+    targetProductId: 'f1',
+    badgeText: 'Últimas Horas',
   },
 ];
 
