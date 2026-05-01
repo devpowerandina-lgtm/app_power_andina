@@ -23,9 +23,11 @@ import {
   catalogProducts,
   promotionalBanners,
   formatPrice,
+  getBrands,
   Product,
   Category,
   PromotionalBanner,
+  Brand,
 } from '../services/ProductService';
 import { useCartStore } from '../../cart/store/useCartStore';
 
@@ -59,6 +61,27 @@ const CategoryChip = ({ item, onPress }: { item: Category; onPress: (id: string)
     >
       {item.name}
     </Text>
+  </TouchableOpacity>
+);
+
+/** Tarjeta cuadrada de marca */
+const BrandCard = ({ item }: { item: Brand }) => (
+  <TouchableOpacity
+    activeOpacity={0.8}
+    onPress={() => console.log('Brand ID:', item.id)}
+    className="w-24 h-24 bg-white rounded-2xl shadow-sm mx-2 items-center justify-center border border-gray-100 overflow-hidden"
+  >
+    {item.image_url ? (
+      <Image
+        source={{ uri: item.image_url }}
+        className="w-full h-full"
+        resizeMode="cover"
+      />
+    ) : (
+      <Text className="text-power-darkGreen font-bold text-center px-2">
+        {item.name}
+      </Text>
+    )}
   </TouchableOpacity>
 );
 
@@ -272,6 +295,22 @@ export const CatalogScreen = ({
             scrollEnabled
             nestedScrollEnabled
           />
+        </View>
+
+        {/* ══════ NUESTRAS MARCAS ══════ */}
+        <View className="mt-6">
+          <Text className="text-sm font-black text-power-darkGreen px-4 mb-3 uppercase tracking-tighter">
+            Nuestras Marcas
+          </Text>
+          <ScrollView
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={{ paddingHorizontal: 8 }}
+          >
+            {getBrands().map((brand) => (
+              <BrandCard key={brand.id} item={brand} />
+            ))}
+          </ScrollView>
         </View>
 
         {/* Título del grid principal */}

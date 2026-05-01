@@ -26,6 +26,12 @@ export interface Product {
   priceBySize?: Record<string, number>;
 }
 
+export interface Brand {
+  id: string;
+  name: string;
+  image_url?: string;
+}
+
 // ────────────────────────────────────────────────────────────
 // CATEGORÍAS
 // ────────────────────────────────────────────────────────────
@@ -189,6 +195,17 @@ export const promotionalBanners: PromotionalBanner[] = [
 ];
 
 // ────────────────────────────────────────────────────────────
+// NUESTRAS MARCAS
+// ────────────────────────────────────────────────────────────
+export const mockBrands: Brand[] = [
+  { id: 'br1', name: 'Luinno', image_url: 'https://picsum.photos/seed/luinno/200/200' },
+  { id: 'br2', name: 'Wind', image_url: 'https://picsum.photos/seed/wind/200/200' },
+  { id: 'br3', name: 'Fantasia', image_url: 'https://picsum.photos/seed/fantasia/200/200' },
+  { id: 'br4', name: 'Good Morning', image_url: 'https://picsum.photos/seed/gm/200/200' },
+  { id: 'br5', name: 'Eco Amigable', image_url: 'https://picsum.photos/seed/eco/200/200' },
+];
+
+// ────────────────────────────────────────────────────────────
 // Helpers
 // ────────────────────────────────────────────────────────────
 export const getProductById = (id: string): Product | undefined => {
@@ -301,4 +318,8 @@ export const getExploreProducts = (): Product[] => {
       sold: 75,
     },
   ];
+};
+
+export const getBrands = (): Brand[] => {
+  return mockBrands;
 };
