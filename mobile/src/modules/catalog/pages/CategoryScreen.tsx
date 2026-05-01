@@ -11,7 +11,7 @@ import {
   TextInput,
   ScrollView,
 } from 'react-native';
-import { ArrowLeft, ShoppingCart, Search } from 'lucide-react-native';
+import { ArrowLeft, ShoppingCart, Search, Star } from 'lucide-react-native';
 import { 
   getProductsByCategory, 
   categories, 
@@ -64,6 +64,17 @@ const CompactProductCard = ({
       >
         {item.name}
       </Text>
+      <View className="flex-row items-center mt-1">
+        <Star size={12} color="#fbbf24" fill="#fbbf24" />
+        <Text className="text-gray-500 text-xs ml-1 font-bold">
+          {item.rating}
+        </Text>
+        <Text className="text-gray-300 mx-1 text-xs">|</Text>
+        <Text className="text-gray-500 text-xs">
+          {item.sold} vendidos
+        </Text>
+      </View>
+
       <View className="flex-row items-center justify-between mt-auto">
         <Text className="text-power-blue font-black text-sm">
           {formatPrice(item.price)}
