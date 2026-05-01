@@ -154,7 +154,7 @@ export const BrandScreen = ({
       {/* Banner Panorámico con Header Integrado */}
       <View className="w-full h-48 md:h-56 overflow-hidden">
         <ImageBackground
-          source={{ uri: brand?.banner_url || 'https://picsum.photos/seed/default/800/400' }}
+          source={brand?.banner_url}
           className="w-full h-full"
           resizeMode="cover"
         >

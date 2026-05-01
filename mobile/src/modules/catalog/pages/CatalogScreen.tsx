@@ -79,7 +79,7 @@ const BrandCard = ({
   >
     {item.logo_url ? (
       <Image
-        source={{ uri: item.logo_url }}
+        source={item.logo_url}
         className="w-full h-full"
         resizeMode="cover"
       />
