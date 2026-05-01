@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import {
   View,
   Text,
@@ -8,8 +8,10 @@ import {
   SafeAreaView,
   StatusBar,
   Dimensions,
+  TextInput,
+  ScrollView,
 } from 'react-native';
-import { ArrowLeft, ShoppingCart } from 'lucide-react-native';
+import { ArrowLeft, ShoppingCart, Search } from 'lucide-react-native';
 import { 
   getProductsByCategory, 
   categories, 
@@ -76,14 +78,66 @@ export const CategoryScreen = ({
   onBack, 
   onNavigateToDetails 
 }: CategoryScreenProps) => {
+  const [searchQuery, setSearchQuery] = useState('');
+  const [sortType, setSortType] = useState<'none' | 'price_asc' | 'price_desc' | 'name_asc' | 'rating'>('none');
+
   const category = useMemo(() => categories.find((c) => c.id === categoryId), [categoryId]);
-  const products = useMemo(() => getProductsByCategory(categoryId), [categoryId]);
+  const categoryProducts = useMemo(() => getProductsByCategory(categoryId), [categoryId]);
   const cartCount = useCartStore((state) => state.totalItems)();
+
+  const displayedProducts = useMemo(() => {
+    let result = [...categoryProducts];
+
+    // Paso A: Búsqueda
+    if (searchQuery) {
+      result = result.filter(product => 
+        product.name.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+    }
+
+    // Paso B: Ordenamiento
+    switch (sortType) {
+      case 'price_asc':
+        result.sort((a, b) => a.price - b.price);
+        break;
+      case 'price_desc':
+        result.sort((a, b) => b.price - a.price);
+        break;
+      case 'name_asc':
+        result.sort((a, b) => a.name.localeCompare(b.name));
+        break;
+      case 'rating':
+        result.sort((a, b) => (b.rating || 0) - (a.rating || 0));
+        break;
+      default:
+        break;
+    }
+
+    return result;
+  }, [categoryProducts, searchQuery, sortType]);
+
+  const SortChip = ({ label, type }: { label: string, type: typeof sortType }) => (
+    <TouchableOpacity
+      onPress={() => setSortType(sortType === type ? 'none' : type)}
+      className={`px-4 py-2 rounded-full mr-2 border ${
+        sortType === type 
+          ? 'bg-power-blue/10 border-power-blue' 
+          : 'bg-gray-50 border-gray-200'
+      }`}
+    >
+      <Text className={`text-xs font-bold ${
+        sortType === type ? 'text-power-blue' : 'text-power-darkGreen/60'
+      }`}>
+        {label}
+      </Text>
+    </TouchableOpacity>
+  );
 
   return (
     <SafeAreaView className="flex-1 bg-power-background">
       <StatusBar barStyle="light-content" />
 
+      {/* Header Azul */}
       <View
         className="bg-power-blue px-4 pb-4 shadow-md flex-row items-center justify-between"
         style={{ paddingTop: StatusBar.currentHeight ? StatusBar.currentHeight + 10 : 50 }}
@@ -111,8 +165,35 @@ export const CategoryScreen = ({
         </View>
       </View>
 
+      {/* Barra de Búsqueda */}
+      <View className="bg-white px-4 py-3 shadow-sm z-10">
+        <View className="flex-row items-center bg-gray-100 rounded-full px-4 h-12">
+          <Search size={20} color="#64748b" />
+          <TextInput
+            placeholder="Buscar en esta categoría..."
+            placeholderTextColor="#94a3b8"
+            className="flex-1 ml-3 text-power-darkGreen font-semibold"
+            value={searchQuery}
+            onChangeText={setSearchQuery}
+          />
+        </View>
+
+        {/* Chips de Ordenamiento */}
+        <ScrollView 
+          horizontal 
+          showsHorizontalScrollIndicator={false}
+          className="mt-3"
+          contentContainerStyle={{ paddingBottom: 2 }}
+        >
+          <SortChip label="Menor Precio" type="price_asc" />
+          <SortChip label="Mayor Precio" type="price_desc" />
+          <SortChip label="A - Z" type="name_asc" />
+          <SortChip label="Mejor Puntuados" type="rating" />
+        </ScrollView>
+      </View>
+
       <FlatList
-        data={products}
+        data={displayedProducts}
         keyExtractor={(item) => item.id}
         numColumns={2}
         renderItem={({ item }) => (
