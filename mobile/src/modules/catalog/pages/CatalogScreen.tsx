@@ -41,9 +41,10 @@ const MARGIN = 8; // Correspondiente a mx-2
 
 
 /** Ícono circular de categoría */
-const CategoryChip = ({ item }: { item: Category }) => (
+const CategoryChip = ({ item, onPress }: { item: Category; onPress: (id: string) => void }) => (
   <TouchableOpacity
     activeOpacity={0.7}
+    onPress={() => onPress(item.id)}
     className="items-center mr-4 w-16"
   >
     <View
@@ -145,10 +146,12 @@ export const CatalogScreen = ({
   onNavigateToNotifications,
   onNavigateToDetails,
   onNavigateToCart,
+  onNavigateToCategory,
 }: { 
   onNavigateToNotifications: () => void;
   onNavigateToDetails: (id: string) => void;
   onNavigateToCart: () => void;
+  onNavigateToCategory: (id: string) => void;
 }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const addToCart = useCartStore((state) => state.addToCart);
@@ -222,7 +225,11 @@ export const CatalogScreen = ({
           contentContainerStyle={{ paddingHorizontal: 16 }}
         >
           {categories.map((cat) => (
-            <CategoryChip key={cat.id} item={cat} />
+            <CategoryChip 
+              key={cat.id} 
+              item={cat} 
+              onPress={onNavigateToCategory}
+            />
           ))}
         </ScrollView>
       </View>

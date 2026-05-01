@@ -30,12 +30,12 @@ export interface Product {
 // CATEGORÍAS
 // ────────────────────────────────────────────────────────────
 export const categories: Category[] = [
-  { id: 'c1', name: 'Detergentes', icon: '🧴', color: '#dbeafe' },
-  { id: 'c2', name: 'Ceras',       icon: '✨', color: '#fef9c3' },
-  { id: 'c3', name: 'Desinfect.',  icon: '🧪', color: '#dcfce7' },
-  { id: 'c4', name: 'Papel',       icon: '🧻', color: '#fce7f3' },
-  { id: 'c5', name: 'Aromas',      icon: '🌸', color: '#ede9fe' },
-  { id: 'c6', name: 'Equipos',     icon: '🔧', color: '#ffedd5' },
+  { id: 'c1', name: 'Detergentes',    icon: '🧴', color: '#dbeafe' },
+  { id: 'c2', name: 'Ceras',          icon: '✨', color: '#fef9c3' },
+  { id: 'c3', name: 'Desinfectantes', icon: '🧪', color: '#dcfce7' },
+  { id: 'c4', name: 'Papel',          icon: '🧻', color: '#fce7f3' },
+  { id: 'c5', name: 'Aromas',         icon: '🌸', color: '#ede9fe' },
+  { id: 'c6', name: 'Equipos',        icon: '🔧', color: '#ffedd5' },
 ];
 
 // ────────────────────────────────────────────────────────────
@@ -122,7 +122,7 @@ export const catalogProducts: Product[] = [
     price: 8900,
     image: 'https://picsum.photos/seed/prod3/300/300',
     images: ['https://picsum.photos/seed/prod3/600/600'],
-    category: 'Aseo',
+    category: 'Detergentes',
     rating: 4.3,
     sold: 450,
     description: 'Jabón suave para manos con glicerina y vitamina E. Protege tu piel mientras elimina bacterias efectivamente.',
@@ -193,4 +193,13 @@ export const formatPrice = (price: number): string => {
     minimumFractionDigits: 0,
     maximumFractionDigits: 0,
   }).format(price);
+};
+
+export const getProductsByCategory = (categoryId: string): Product[] => {
+  const category = categories.find((c) => c.id === categoryId);
+  if (!category) return [];
+  
+  // Filtramos tanto los destacados como el catálogo general que coincidan con el nombre de la categoría
+  const allProducts = [...featuredProducts, ...catalogProducts];
+  return allProducts.filter((p) => p.category.toLowerCase() === category.name.toLowerCase());
 };

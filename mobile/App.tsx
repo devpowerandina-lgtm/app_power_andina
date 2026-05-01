@@ -10,13 +10,15 @@ import { CatalogScreen } from './src/modules/catalog/pages/CatalogScreen';
 import { ProductDetailScreen } from './src/modules/catalog/pages/ProductDetailScreen';
 import { CartScreen } from './src/modules/cart/pages/CartScreen';
 import { NotificationScreen } from './src/modules/notifications/pages/NotificationScreen';
+import { CategoryScreen } from './src/modules/catalog/pages/CategoryScreen';
 import { useNetworkStatus } from './src/shared/hooks/useNetworkStatus';
 import { supabase } from './src/shared/infrastructure/supabase';
 
 export default function App() {
   const { isConnected } = useNetworkStatus();
-  const [currentScreen, setCurrentScreen] = useState<'login' | 'register' | 'home' | 'notifications' | 'details' | 'cart'>('login');
+  const [currentScreen, setCurrentScreen] = useState<'login' | 'register' | 'home' | 'notifications' | 'details' | 'cart' | 'category'>('login');
   const [selectedProductId, setSelectedProductId] = useState<string | null>(null);
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [session, setSession] = useState<any>(null);
   const [loading, setLoading] = useState(true);
 
@@ -36,7 +38,7 @@ export default function App() {
 
   useEffect(() => {
     const backAction = () => {
-      if (currentScreen === 'details' || currentScreen === 'cart' || currentScreen === 'notifications') {
+      if (currentScreen === 'details' || currentScreen === 'cart' || currentScreen === 'notifications' || currentScreen === 'category') {
         setCurrentScreen('home');
         return true; // Bloquea el cierre
       }
@@ -85,6 +87,10 @@ export default function App() {
             setCurrentScreen('details');
           }}
           onNavigateToCart={() => setCurrentScreen('cart')}
+          onNavigateToCategory={(catId) => {
+            setSelectedCategory(catId);
+            setCurrentScreen('category');
+          }}
         />
       )}
 
@@ -101,6 +107,17 @@ export default function App() {
 
       {currentScreen === 'cart' && (
         <CartScreen onBack={() => setCurrentScreen('home')} />
+      )}
+
+      {currentScreen === 'category' && selectedCategory && (
+        <CategoryScreen
+          categoryId={selectedCategory}
+          onBack={() => setCurrentScreen('home')}
+          onNavigateToDetails={(id) => {
+            setSelectedProductId(id);
+            setCurrentScreen('details');
+          }}
+        />
       )}
     </View>
   );
