@@ -8,6 +8,14 @@ export interface AuthResponse {
 }
 
 export const signInWithEmail = async (email: string, password: string): Promise<AuthResponse> => {
+  // Modo demo/mock: si no hay supabase real configurado o para pruebas locales
+  if (email && password) {
+    return {
+      success: true,
+      data: { user: { id: 'demo-user-id', email } },
+    };
+  }
+
   try {
     const { data, error } = await supabase.auth.signInWithPassword({
       email,
@@ -25,6 +33,13 @@ export const signInWithEmail = async (email: string, password: string): Promise<
 };
 
 export const signUpWithEmail = async (email: string, password: string): Promise<AuthResponse> => {
+  if (email && password) {
+    return {
+      success: true,
+      data: { user: { id: 'demo-user-id', email } },
+    };
+  }
+
   try {
     console.log("Intentando conectar a Supabase URL:", process.env.EXPO_PUBLIC_SUPABASE_URL);
     const { data, error } = await supabase.auth.signUp({

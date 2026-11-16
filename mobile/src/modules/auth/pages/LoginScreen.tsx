@@ -12,8 +12,8 @@ interface LoginScreenProps {
 }
 
 export const LoginScreen = ({ onNavigateToRegister, onLoginSuccess }: LoginScreenProps) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('demo@powerandina.com');
+  const [password, setPassword] = useState('123456');
   const [loading, setLoading] = useState(false);
   const [googleLoading, setGoogleLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
