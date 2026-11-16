@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useMemo } from 'react';
 import {
   View,
   Text,
@@ -104,7 +104,29 @@ export const ProductDetailScreen = ({ productId, goBack }: ProductDetailScreenPr
     ? (product.priceBySize[selectedSize] || product.price)
     : product.price;
 
-  const productImages = product.images || [product.image];
+  // Imagen reactiva según la combinación seleccionada de Aroma y Tamaño
+  const variantImage = useMemo(() => {
+    if (!product.imagesByVariant) return null;
+    
+    // 1. Combinación exacta de Aroma y Tamaño
+    if (selectedAroma && selectedSize) {
+      const comboKey = `${selectedAroma}__${selectedSize}`;
+      if (product.imagesByVariant[comboKey]) return product.imagesByVariant[comboKey];
+    }
+    // 2. Por Aroma seleccionado
+    if (selectedAroma && product.imagesByVariant[selectedAroma]) {
+      return product.imagesByVariant[selectedAroma];
+    }
+    // 3. Por Tamaño seleccionado
+    if (selectedSize && product.imagesByVariant[selectedSize]) {
+      return product.imagesByVariant[selectedSize];
+    }
+    return null;
+  }, [product, selectedAroma, selectedSize]);
+
+  const productImages = variantImage 
+    ? [variantImage, ...(product.images || [])] 
+    : (product.images || [product.image]);
   const discountPct = product.originalPrice
     ? Math.round(((product.originalPrice - currentPrice) / product.originalPrice) * 100)
     : null;
