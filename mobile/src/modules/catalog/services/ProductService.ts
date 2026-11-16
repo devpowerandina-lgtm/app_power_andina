@@ -131,13 +131,13 @@ export const featuredProducts: Product[] = [
     "sizes": [
       "20 LT",
       "250 ML",
-      "3",
+      "3.75 LT",
       "120 ML"
     ],
     "priceBySize": {
-      "3": 17500,
       "20 LT": 16000,
       "250 ML": 6500,
+      "3.75 LT": 17500,
       "120 ML": 4000
     },
     "aromas": [
@@ -159,15 +159,15 @@ export const featuredProducts: Product[] = [
     "sizes": [
       "2 LT",
       "20 LT",
-      "3",
+      "3.75 LT",
       "500 ML",
       "1 LT",
       "300 ML"
     ],
     "priceBySize": {
-      "3": 12500,
       "2 LT": 9200,
       "20 LT": 42500,
+      "3.75 LT": 12500,
       "500 ML": 3200,
       "1 LT": 5600,
       "300 ML": 1800
@@ -191,15 +191,15 @@ export const featuredProducts: Product[] = [
     "sizes": [
       "2 LT",
       "20 LT",
-      "3",
+      "3.75 LT",
       "500 ML",
       "1 LT",
       "300 ML"
     ],
     "priceBySize": {
-      "3": 12500,
       "2 LT": 9200,
       "20 LT": 42500,
+      "3.75 LT": 12500,
       "500 ML": 3200,
       "1 LT": 5600,
       "300 ML": 1800
@@ -223,13 +223,13 @@ export const featuredProducts: Product[] = [
     "sizes": [
       "250 ML",
       "20 LT",
-      "3",
+      "3.75 LT",
       "120 ML"
     ],
     "priceBySize": {
-      "3": 17500,
       "250 ML": 6500,
       "20 LT": 16000,
+      "3.75 LT": 17500,
       "120 ML": 4000
     },
     "aromas": [
@@ -321,13 +321,13 @@ export const catalogProducts: Product[] = [
     "sizes": [
       "20 LT",
       "250 ML",
-      "3",
+      "3.75 LT",
       "120 ML"
     ],
     "priceBySize": {
-      "3": 17500,
       "20 LT": 16000,
       "250 ML": 6500,
+      "3.75 LT": 17500,
       "120 ML": 4000
     },
     "aromas": [
@@ -352,15 +352,15 @@ export const catalogProducts: Product[] = [
     "sizes": [
       "2 LT",
       "20 LT",
-      "3",
+      "3.75 LT",
       "500 ML",
       "1 LT",
       "300 ML"
     ],
     "priceBySize": {
-      "3": 12500,
       "2 LT": 9200,
       "20 LT": 42500,
+      "3.75 LT": 12500,
       "500 ML": 3200,
       "1 LT": 5600,
       "300 ML": 1800
@@ -388,15 +388,15 @@ export const catalogProducts: Product[] = [
     "sizes": [
       "2 LT",
       "20 LT",
-      "3",
+      "3.75 LT",
       "500 ML",
       "1 LT",
       "300 ML"
     ],
     "priceBySize": {
-      "3": 12500,
       "2 LT": 9200,
       "20 LT": 42500,
+      "3.75 LT": 12500,
       "500 ML": 3200,
       "1 LT": 5600,
       "300 ML": 1800
@@ -423,13 +423,13 @@ export const catalogProducts: Product[] = [
     "sizes": [
       "250 ML",
       "20 LT",
-      "3",
+      "3.75 LT",
       "120 ML"
     ],
     "priceBySize": {
-      "3": 17500,
       "250 ML": 6500,
       "20 LT": 16000,
+      "3.75 LT": 17500,
       "120 ML": 4000
     },
     "aromas": [
@@ -454,14 +454,14 @@ export const catalogProducts: Product[] = [
     "sizes": [
       "2 LT",
       "20 LT",
-      "3",
+      "3.75 LT",
       "500 ML",
       "1 LT"
     ],
     "priceBySize": {
-      "3": 12500,
       "2 LT": 9200,
       "20 LT": 42500,
+      "3.75 LT": 12500,
       "500 ML": 3200,
       "1 LT": 3900
     },
@@ -488,13 +488,13 @@ export const catalogProducts: Product[] = [
       "120 ML",
       "250 ML",
       "20 LT",
-      "3"
+      "3.75 LT"
     ],
     "priceBySize": {
-      "3": 17500,
       "120 ML": 4000,
       "250 ML": 6500,
-      "20 LT": 16000
+      "20 LT": 16000,
+      "3.75 LT": 17500
     },
     "aromas": [
       "YELLOW FRUITS"
@@ -517,17 +517,17 @@ export const catalogProducts: Product[] = [
     "sold": 457,
     "brandId": "br4",
     "sizes": [
-      "250 ML SPRAY",
-      "500 ML SPRAY",
-      "1 LT ATM",
-      "3",
+      "250 ML",
+      "500 ML",
+      "1 LT",
+      "3.75 LT",
       "20 LT"
     ],
     "priceBySize": {
-      "3": 22000,
-      "250 ML SPRAY": 2900,
-      "500 ML SPRAY": 4500,
-      "1 LT ATM": 7200,
+      "250 ML": 2900,
+      "500 ML": 4500,
+      "1 LT": 7200,
+      "3.75 LT": 22000,
       "20 LT": 102200
     },
     "description": "Alcohol Glicerinado Wind 70% con calidad garantizada de WIND. Ideal para uso institucional y del hogar."
@@ -569,17 +569,17 @@ export const catalogProducts: Product[] = [
     "sold": 81,
     "brandId": "br4",
     "sizes": [
-      "250 ML SPRAY",
-      "500 ML SPRAY",
-      "1 LT ATM",
-      "3",
+      "250 ML",
+      "500 ML",
+      "1 LT",
+      "3.75 LT",
       "20 LT"
     ],
     "priceBySize": {
-      "3": 2900,
-      "250 ML SPRAY": 102200,
-      "500 ML SPRAY": 4500,
-      "1 LT ATM": 22000,
+      "250 ML": 102200,
+      "500 ML": 4500,
+      "1 LT": 22000,
+      "3.75 LT": 2900,
       "20 LT": 7200
     },
     "description": "Alcohol Etilico Wind 70% con calidad garantizada de WIND. Ideal para uso institucional y del hogar."
@@ -626,13 +626,13 @@ export const catalogProducts: Product[] = [
     "brandId": "br1",
     "sizes": [
       "20 LT",
-      "3",
+      "3.75 LT",
       "120 ML",
       "250 ML"
     ],
     "priceBySize": {
-      "3": 17500,
       "20 LT": 16000,
+      "3.75 LT": 17500,
       "120 ML": 4000,
       "250 ML": 6500
     },
@@ -658,13 +658,13 @@ export const catalogProducts: Product[] = [
     "sizes": [
       "120 ML",
       "250 ML",
-      "3",
+      "3.75 LT",
       "20 LT"
     ],
     "priceBySize": {
-      "3": 17500,
       "120 ML": 4000,
       "250 ML": 6500,
+      "3.75 LT": 17500,
       "20 LT": 16000
     },
     "aromas": [
@@ -689,13 +689,13 @@ export const catalogProducts: Product[] = [
     "sizes": [
       "20 LT",
       "250 ML",
-      "3",
+      "3.75 LT",
       "120 ML"
     ],
     "priceBySize": {
-      "3": 17500,
       "20 LT": 4000,
       "250 ML": 16000,
+      "3.75 LT": 17500,
       "120 ML": 6500
     },
     "aromas": [
@@ -749,11 +749,11 @@ export const catalogProducts: Product[] = [
     "sold": 186,
     "brandId": "br2",
     "sizes": [
-      "3",
+      "3.75 LT",
       "20 LT"
     ],
     "priceBySize": {
-      "3": 1000,
+      "3.75 LT": 1000,
       "20 LT": 10500
     },
     "description": "Desengrasante Industrial Good Morning con calidad garantizada de GOOD MORNING. Ideal para uso institucional y del hogar."
@@ -774,12 +774,12 @@ export const catalogProducts: Product[] = [
     "sold": 260,
     "brandId": "br1",
     "sizes": [
-      "3",
+      "3.75 LT",
       "20 LT",
       "1 LT"
     ],
     "priceBySize": {
-      "3": 13500,
+      "3.75 LT": 13500,
       "20 LT": 49000,
       "1 LT": 5800
     },
@@ -800,7 +800,7 @@ export const catalogProducts: Product[] = [
     "sold": 297,
     "brandId": "br5",
     "sizes": [
-      "3",
+      "3.75 LT",
       "20 LT",
       "2 LT",
       "4 LT",
@@ -808,7 +808,7 @@ export const catalogProducts: Product[] = [
       "500 ML"
     ],
     "priceBySize": {
-      "3": 6300,
+      "3.75 LT": 6300,
       "20 LT": 19500,
       "2 LT": 3000,
       "4 LT": 6300,
@@ -832,12 +832,12 @@ export const catalogProducts: Product[] = [
     "sold": 371,
     "brandId": "br5",
     "sizes": [
-      "3",
+      "3.75 LT",
       "20 LT",
       "1 LT"
     ],
     "priceBySize": {
-      "3": 12500,
+      "3.75 LT": 12500,
       "20 LT": 53500,
       "1 LT": 3600
     },
@@ -859,13 +859,13 @@ export const catalogProducts: Product[] = [
     "sold": 445,
     "brandId": "br1",
     "sizes": [
-      "3",
+      "3.75 LT",
       "20 LT",
       "810 ML",
       "500 ML"
     ],
     "priceBySize": {
-      "3": 53000,
+      "3.75 LT": 53000,
       "20 LT": 245000,
       "810 ML": 11900,
       "500 ML": 7350
@@ -891,11 +891,11 @@ export const catalogProducts: Product[] = [
     "brandId": "br2",
     "sizes": [
       "20 LT",
-      "3"
+      "3.75 LT"
     ],
     "priceBySize": {
-      "3": 10500,
-      "20 LT": 42500
+      "20 LT": 42500,
+      "3.75 LT": 10500
     },
     "aromas": [
       "NEUTRO"
@@ -1005,18 +1005,18 @@ export const catalogProducts: Product[] = [
     "sold": 365,
     "brandId": "br1",
     "sizes": [
-      "SACHET 90 ML",
+      "90 ML (Sachet)",
       "1 LT",
-      "3",
+      "3.75 LT",
       "500 ML",
       "5 LT",
       "20 LT",
       "2 LT"
     ],
     "priceBySize": {
-      "3": 11500,
-      "SACHET 90 ML": 3600,
+      "90 ML (Sachet)": 3600,
       "1 LT": 700,
+      "3.75 LT": 11500,
       "500 ML": 2200,
       "5 LT": 2200,
       "20 LT": 42500,
@@ -1081,14 +1081,14 @@ export const catalogProducts: Product[] = [
     "sizes": [
       "2 LT",
       "500 ML",
-      "3",
+      "3.75 LT",
       "20 LT",
       "1 LT"
     ],
     "priceBySize": {
-      "3": 8000,
       "2 LT": 4050,
       "500 ML": 1700,
+      "3.75 LT": 8000,
       "20 LT": 36000,
       "1 LT": 2350
     },
@@ -1114,13 +1114,13 @@ export const catalogProducts: Product[] = [
     "sold": 100,
     "brandId": "br1",
     "sizes": [
-      "3",
+      "3.75 LT",
       "20 LT",
       "810 ML",
       "500 ML"
     ],
     "priceBySize": {
-      "3": 5400,
+      "3.75 LT": 5400,
       "20 LT": 36000,
       "810 ML": 160000,
       "500 ML": 8800
@@ -1145,13 +1145,13 @@ export const catalogProducts: Product[] = [
     "sold": 137,
     "brandId": "br1",
     "sizes": [
-      "3",
+      "3.75 LT",
       "20 LT",
       "810 ML",
       "500 ML"
     ],
     "priceBySize": {
-      "3": 36000,
+      "3.75 LT": 36000,
       "20 LT": 160000,
       "810 ML": 8800,
       "500 ML": 5400
@@ -1180,13 +1180,13 @@ export const catalogProducts: Product[] = [
       "4 LT",
       "20 LT",
       "810 ML",
-      "3"
+      "3.75 LT"
     ],
     "priceBySize": {
-      "3": 1,
       "1 LT": 3900,
       "4 LT": 12000,
-      "20 LT": 43500
+      "20 LT": 43500,
+      "3.75 LT": 1
     },
     "description": "Jabon Blúrey Good Morning con calidad garantizada de GOOD MORNING. Ideal para uso institucional y del hogar."
   },
@@ -1234,10 +1234,10 @@ export const catalogProducts: Product[] = [
     "sold": 433,
     "brandId": "br2",
     "sizes": [
-      "75 LT"
+      "3.75 LT"
     ],
     "priceBySize": {
-      "75 LT": 29500
+      "3.75 LT": 29500
     },
     "aromas": [
       "BABY NV"
@@ -1260,10 +1260,10 @@ export const catalogProducts: Product[] = [
     "sold": 470,
     "brandId": "br2",
     "sizes": [
-      "Unidad"
+      "Copa Ref 500"
     ],
     "priceBySize": {
-      "Unidad": 6500
+      "Copa Ref 500": 6500
     },
     "description": "Trapero Con Palo Copa Ref 500 con calidad garantizada de GOOD MORNING. Ideal para uso institucional y del hogar."
   },
@@ -1283,14 +1283,14 @@ export const catalogProducts: Product[] = [
     "brandId": "br2",
     "sizes": [
       "500 ML",
-      "PAGUE 750 ML LLEVE 1000 ML",
-      "PAGUE 3",
+      "1 LT (Promo 750ml)",
+      "3.75 LT (Galón)",
       "20 LT"
     ],
     "priceBySize": {
       "500 ML": 2600,
-      "PAGUE 750 ML LLEVE 1000 ML": 3900,
-      "PAGUE 3": 8500,
+      "1 LT (Promo 750ml)": 3900,
+      "3.75 LT (Galón)": 8500,
       "20 LT": 34000
     },
     "description": "Brillavidrios con calidad garantizada de GOOD MORNING. Ideal para uso institucional y del hogar."
@@ -1312,13 +1312,13 @@ export const catalogProducts: Product[] = [
     "sizes": [
       "20 LT",
       "120 ML",
-      "3",
+      "3.75 LT",
       "250 ML"
     ],
     "priceBySize": {
-      "3": 17500,
       "20 LT": 16000,
       "120 ML": 4000,
+      "3.75 LT": 17500,
       "250 ML": 6500
     },
     "aromas": [
@@ -1345,13 +1345,13 @@ export const catalogProducts: Product[] = [
       "20 LT",
       "240 ML",
       "500 ML",
-      "3"
+      "3.75 LT"
     ],
     "priceBySize": {
-      "3": 11200,
       "20 LT": 49000,
       "240 ML": 1800,
-      "500 ML": 2800
+      "500 ML": 2800,
+      "3.75 LT": 11200
     },
     "description": "Creolina Good Morning con calidad garantizada de GOOD MORNING. Ideal para uso institucional y del hogar."
   },
@@ -1370,11 +1370,11 @@ export const catalogProducts: Product[] = [
     "sold": 242,
     "brandId": "br2",
     "sizes": [
-      "3",
+      "3.75 LT",
       "20 LT"
     ],
     "priceBySize": {
-      "3": 10500,
+      "3.75 LT": 10500,
       "20 LT": 43500
     },
     "description": "Detergente Liq Good Morning con calidad garantizada de GOOD MORNING. Ideal para uso institucional y del hogar."
@@ -1396,14 +1396,14 @@ export const catalogProducts: Product[] = [
     "sizes": [
       "500 ML",
       "20 LT",
-      "3",
-      "1 LT"
+      "3.75 LT",
+      "1 LT (Promo 750ml)"
     ],
     "priceBySize": {
-      "3": 11200,
       "500 ML": 5200,
       "20 LT": 46000,
-      "1 LT": 7200
+      "3.75 LT": 11200,
+      "1 LT (Promo 750ml)": 7200
     },
     "description": "Quita Grasa Fantasia con calidad garantizada de FANTASIA. Ideal para uso institucional y del hogar."
   },
@@ -1422,11 +1422,11 @@ export const catalogProducts: Product[] = [
     "sold": 347,
     "brandId": "br2",
     "sizes": [
-      "3",
+      "3.75 LT",
       "20 LT"
     ],
     "priceBySize": {
-      "3": 22000,
+      "3.75 LT": 22000,
       "20 LT": 104000
     },
     "aromas": [
@@ -1480,13 +1480,13 @@ export const catalogProducts: Product[] = [
     "sizes": [
       "500 ML",
       "810 ML",
-      "3",
+      "3.75 LT",
       "20 LT"
     ],
     "priceBySize": {
-      "3": 4000,
       "500 ML": 1500,
       "810 ML": 2500,
+      "3.75 LT": 4000,
       "20 LT": 26500
     },
     "description": "Vinagre De Limpieza Good Morning con calidad garantizada de GOOD MORNING. Ideal para uso institucional y del hogar."
@@ -1559,13 +1559,13 @@ export const catalogProducts: Product[] = [
     "sizes": [
       "250 ML",
       "120 ML",
-      "3",
+      "3.75 LT",
       "20 LT"
     ],
     "priceBySize": {
-      "3": 17500,
       "250 ML": 6500,
       "120 ML": 4000,
+      "3.75 LT": 17500,
       "20 LT": 16000
     },
     "aromas": [
@@ -1590,13 +1590,13 @@ export const catalogProducts: Product[] = [
     "sizes": [
       "250 ML",
       "120 ML",
-      "3",
+      "3.75 LT",
       "20 LT"
     ],
     "priceBySize": {
-      "3": 17500,
       "250 ML": 16000,
       "120 ML": 6500,
+      "3.75 LT": 17500,
       "20 LT": 4000
     },
     "aromas": [
@@ -1622,13 +1622,13 @@ export const catalogProducts: Product[] = [
       "250 ML",
       "20 LT",
       "120 ML",
-      "3"
+      "3.75 LT"
     ],
     "priceBySize": {
-      "3": 17500,
       "250 ML": 16000,
       "20 LT": 4000,
-      "120 ML": 6500
+      "120 ML": 6500,
+      "3.75 LT": 17500
     },
     "aromas": [
       "NEW FRESH"
@@ -1651,14 +1651,14 @@ export const catalogProducts: Product[] = [
     "brandId": "br1",
     "sizes": [
       "1 LT",
-      "3",
+      "3.75 LT",
       "500 ML",
       "20 LT",
       "2 LT"
     ],
     "priceBySize": {
-      "3": 2200,
       "1 LT": 42500,
+      "3.75 LT": 2200,
       "500 ML": 6200,
       "20 LT": 15400,
       "2 LT": 11500
@@ -1686,14 +1686,14 @@ export const catalogProducts: Product[] = [
     "brandId": "br1",
     "sizes": [
       "1 LT",
-      "3",
+      "3.75 LT",
       "500 ML",
       "20 LT",
       "2 LT"
     ],
     "priceBySize": {
-      "3": 15400,
       "1 LT": 6200,
+      "3.75 LT": 15400,
       "500 ML": 2200,
       "20 LT": 11500,
       "2 LT": 42500
@@ -1719,14 +1719,14 @@ export const catalogProducts: Product[] = [
     "brandId": "br1",
     "sizes": [
       "1 LT",
-      "3",
+      "3.75 LT",
       "20 LT",
       "500 ML",
       "2 LT"
     ],
     "priceBySize": {
-      "3": 6200,
       "1 LT": 42500,
+      "3.75 LT": 6200,
       "20 LT": 2200,
       "500 ML": 42500,
       "2 LT": 11500
@@ -1752,15 +1752,15 @@ export const catalogProducts: Product[] = [
     "brandId": "br1",
     "sizes": [
       "1 LT",
-      "3",
+      "3.75 LT",
       "5 LT",
       "20 LT",
       "500 ML",
       "2 LT"
     ],
     "priceBySize": {
-      "3": 11500,
       "1 LT": 3600,
+      "3.75 LT": 11500,
       "5 LT": 2200,
       "20 LT": 42500,
       "500 ML": 3600,
@@ -1788,15 +1788,15 @@ export const catalogProducts: Product[] = [
     "sizes": [
       "1 LT",
       "500 ML",
-      "3",
+      "3.75 LT",
       "5 LT",
       "20 LT",
       "2 LT"
     ],
     "priceBySize": {
-      "3": 2200,
       "1 LT": 3600,
       "500 ML": 3600,
+      "3.75 LT": 2200,
       "5 LT": 6200,
       "20 LT": 11500,
       "2 LT": 42500
@@ -1824,13 +1824,13 @@ export const catalogProducts: Product[] = [
     "sizes": [
       "500 ML",
       "20 LT",
-      "3",
+      "3.75 LT",
       "1 LT"
     ],
     "priceBySize": {
-      "3": 6200,
       "500 ML": 3600,
       "20 LT": 11500,
+      "3.75 LT": 6200,
       "1 LT": 42500
     },
     "aromas": [
@@ -1878,12 +1878,12 @@ export const catalogProducts: Product[] = [
     "brandId": "br1",
     "sizes": [
       "20 LT",
-      "3",
+      "3.75 LT",
       "810 ML"
     ],
     "priceBySize": {
-      "3": 66000,
       "20 LT": 3950,
+      "3.75 LT": 66000,
       "810 ML": 15200
     },
     "description": "Tratamiento Pisos Laminado Fantasia con calidad garantizada de FANTASIA. Ideal para uso institucional y del hogar."
@@ -1903,10 +1903,10 @@ export const catalogProducts: Product[] = [
     "sold": 397,
     "brandId": "br2",
     "sizes": [
-      "75 LT"
+      "3.75 LT"
     ],
     "priceBySize": {
-      "75 LT": 29500
+      "3.75 LT": 29500
     },
     "aromas": [
       "CITRUS"
@@ -1954,10 +1954,10 @@ export const catalogProducts: Product[] = [
     "sold": 58,
     "brandId": "br2",
     "sizes": [
-      "Unidad"
+      "Copa Ref 800"
     ],
     "priceBySize": {
-      "Unidad": 7100
+      "Copa Ref 800": 7100
     },
     "description": "Trapero Con Palo Copa Ref 800 con calidad garantizada de GOOD MORNING. Ideal para uso institucional y del hogar."
   },
@@ -1976,10 +1976,10 @@ export const catalogProducts: Product[] = [
     "sold": 169,
     "brandId": "br2",
     "sizes": [
-      "Unidad"
+      "Copa Ref 1000"
     ],
     "priceBySize": {
-      "Unidad": 8100
+      "Copa Ref 1000": 8100
     },
     "description": "Trapero Con Palo Copa Ref 1000 con calidad garantizada de GOOD MORNING. Ideal para uso institucional y del hogar."
   },
@@ -2061,14 +2061,14 @@ export const catalogProducts: Product[] = [
     "sizes": [
       "500 ML",
       "1 LT",
-      "3",
+      "3.75 LT",
       "20 LT",
       "2 LT"
     ],
     "priceBySize": {
-      "3": 15400,
       "500 ML": 6200,
       "1 LT": 42500,
+      "3.75 LT": 15400,
       "20 LT": 2200,
       "2 LT": 11500
     },
@@ -2093,10 +2093,10 @@ export const catalogProducts: Product[] = [
     "sold": 200,
     "brandId": "br1",
     "sizes": [
-      "SACHET 90 ML"
+      "90 ML (Sachet)"
     ],
     "priceBySize": {
-      "SACHET 90 ML": 1000
+      "90 ML (Sachet)": 1000
     },
     "description": "Detergente Liq Bicarbonato Fantasia Basic con calidad garantizada de FANTASIA. Ideal para uso institucional y del hogar."
   },
@@ -2116,14 +2116,14 @@ export const catalogProducts: Product[] = [
     "brandId": "br1",
     "sizes": [
       "1 LT",
-      "3",
+      "3.75 LT",
       "20 LT",
       "2 LT",
       "500 ML"
     ],
     "priceBySize": {
-      "3": 2200,
       "1 LT": 11500,
+      "3.75 LT": 2200,
       "20 LT": 6200,
       "2 LT": 3600,
       "500 ML": 3600
@@ -2150,11 +2150,11 @@ export const catalogProducts: Product[] = [
     "brandId": "br1",
     "sizes": [
       "500 ML",
-      "3"
+      "3.75 LT"
     ],
     "priceBySize": {
-      "3": 22000,
-      "500 ML": 3800
+      "500 ML": 3800,
+      "3.75 LT": 22000
     },
     "description": "Limpiador De Juntas Fantasia con calidad garantizada de FANTASIA. Ideal para uso institucional y del hogar."
   },
@@ -2176,15 +2176,15 @@ export const catalogProducts: Product[] = [
       "500 ML",
       "1 LT",
       "2 LT",
-      "3",
+      "3.75 LT",
       "5 LT",
       "20 LT"
     ],
     "priceBySize": {
-      "3": 11500,
       "500 ML": 2200,
       "1 LT": 3600,
       "2 LT": 6200,
+      "3.75 LT": 11500,
       "5 LT": 15400,
       "20 LT": 42500
     },
@@ -2210,12 +2210,12 @@ export const catalogProducts: Product[] = [
     "sizes": [
       "20 LT",
       "250 ML",
-      "3"
+      "3.75 LT"
     ],
     "priceBySize": {
-      "3": 142000,
       "20 LT": 5200,
-      "250 ML": 29500
+      "250 ML": 29500,
+      "3.75 LT": 142000
     },
     "aromas": [
       "CANELA"
@@ -2264,11 +2264,11 @@ export const catalogProducts: Product[] = [
     "brandId": "br2",
     "sizes": [
       "20 LT",
-      "3"
+      "3.75 LT"
     ],
     "priceBySize": {
-      "3": 29500,
-      "20 LT": 142000
+      "20 LT": 142000,
+      "3.75 LT": 29500
     },
     "description": "Silicona Líquida New Car Good Morning con calidad garantizada de GOOD MORNING. Ideal para uso institucional y del hogar."
   },
@@ -2291,15 +2291,15 @@ export const catalogProducts: Product[] = [
       "2 LT",
       "4 LT",
       "20 LT",
-      "3",
+      "3.75 LT",
       "3 LT",
       "5 LT",
       "1 LT"
     ],
     "priceBySize": {
-      "3": 3800,
       "2 LT": 8800,
       "4 LT": 15000,
+      "3.75 LT": 3800,
       "3 LT": 14500,
       "5 LT": 14500,
       "1 LT": 42500
@@ -2324,14 +2324,14 @@ export const catalogProducts: Product[] = [
     "sold": 114,
     "brandId": "br4",
     "sizes": [
-      "3",
+      "3.75 LT",
       "20 LT",
       "500 ML",
       "1 LT",
       "2 LT"
     ],
     "priceBySize": {
-      "3": 42500,
+      "3.75 LT": 42500,
       "20 LT": 9200,
       "500 ML": 3200,
       "1 LT": 12500,
@@ -2409,12 +2409,12 @@ export const catalogProducts: Product[] = [
     "brandId": "br2",
     "sizes": [
       "1 LT",
-      "3",
+      "3.75 LT",
       "20 LT"
     ],
     "priceBySize": {
-      "3": 15000,
       "1 LT": 6000,
+      "3.75 LT": 15000,
       "20 LT": 48000
     },
     "description": "Shampoo Para Autos Good Morning con calidad garantizada de GOOD MORNING. Ideal para uso institucional y del hogar."
@@ -2434,10 +2434,10 @@ export const catalogProducts: Product[] = [
     "sold": 108,
     "brandId": "br2",
     "sizes": [
-      "3"
+      "3.75 LT"
     ],
     "priceBySize": {
-      "3": 33200
+      "3.75 LT": 33200
     },
     "description": "Sellador Polimerico Autobrillante Good Morning con calidad garantizada de GOOD MORNING. Ideal para uso institucional y del hogar."
   },
@@ -2483,11 +2483,11 @@ export const catalogProducts: Product[] = [
     "brandId": "br2",
     "sizes": [
       "20 LT",
-      "3"
+      "3.75 LT"
     ],
     "priceBySize": {
-      "3": 10500,
-      "20 LT": 43500
+      "20 LT": 43500,
+      "3.75 LT": 10500
     },
     "aromas": [
       "NEUTRO"
@@ -2571,13 +2571,13 @@ export const catalogProducts: Product[] = [
     "brandId": "br5",
     "sizes": [
       "1 KG",
-      "TARRO 240 GR 12 PASTILLAS",
-      "TARRO 480 GR 24 PASTILLAS"
+      "240 GR (12 pastillas)",
+      "480 GR (24 pastillas)"
     ],
     "priceBySize": {
       "1 KG": 8400,
-      "TARRO 240 GR 12 PASTILLAS": 3800,
-      "TARRO 480 GR 24 PASTILLAS": 6500
+      "240 GR (12 pastillas)": 3800,
+      "480 GR (24 pastillas)": 6500
     },
     "description": "Pastillas Cloro Blanqueador Q con calidad garantizada de BLAN Q. Ideal para uso institucional y del hogar."
   },
@@ -2627,11 +2627,11 @@ export const catalogProducts: Product[] = [
     "sold": 213,
     "brandId": "br2",
     "sizes": [
-      "3",
+      "3.75 LT",
       "20 LT"
     ],
     "priceBySize": {
-      "3": 22000,
+      "3.75 LT": 22000,
       "20 LT": 104000
     },
     "aromas": [
@@ -2655,13 +2655,13 @@ export const catalogProducts: Product[] = [
     "brandId": "br2",
     "sizes": [
       "810 ML",
-      "3",
+      "3.75 LT",
       "500 ML",
       "20 LT"
     ],
     "priceBySize": {
-      "3": 25000,
       "810 ML": 6800,
+      "3.75 LT": 25000,
       "500 ML": 4200,
       "20 LT": 118400
     },
@@ -2682,12 +2682,12 @@ export const catalogProducts: Product[] = [
     "sold": 281,
     "brandId": "br1",
     "sizes": [
-      "3",
+      "3.75 LT",
       "20 LT",
       "810 ML"
     ],
     "priceBySize": {
-      "3": 18500,
+      "3.75 LT": 18500,
       "20 LT": 72000,
       "810 ML": 7000
     },
@@ -2712,14 +2712,14 @@ export const catalogProducts: Product[] = [
       "500 ML",
       "1 LT",
       "2 LT",
-      "3",
+      "3.75 LT",
       "20 LT"
     ],
     "priceBySize": {
-      "3": 18500,
       "500 ML": 3500,
       "1 LT": 12500,
       "2 LT": 6500,
+      "3.75 LT": 18500,
       "20 LT": 72500
     },
     "aromas": [
@@ -2745,14 +2745,14 @@ export const catalogProducts: Product[] = [
       "500 ML",
       "1 LT",
       "2 LT",
-      "3",
+      "3.75 LT",
       "20 LT"
     ],
     "priceBySize": {
-      "3": 18500,
       "500 ML": 3500,
       "1 LT": 6500,
       "2 LT": 12500,
+      "3.75 LT": 18500,
       "20 LT": 72500
     },
     "aromas": [
@@ -2775,13 +2775,13 @@ export const catalogProducts: Product[] = [
     "sold": 497,
     "brandId": "br1",
     "sizes": [
-      "3",
+      "3.75 LT",
       "20 LT",
       "1 LT",
       "500 ML"
     ],
     "priceBySize": {
-      "3": 18500,
+      "3.75 LT": 18500,
       "20 LT": 72500,
       "1 LT": 7000,
       "500 ML": 7500
@@ -2807,15 +2807,15 @@ export const catalogProducts: Product[] = [
     "brandId": "br4",
     "sizes": [
       "2 LT",
-      "3",
+      "3.75 LT",
       "1 LT",
       "20 LT",
       "500 ML",
       "300 ML"
     ],
     "priceBySize": {
-      "3": 12500,
       "2 LT": 9200,
+      "3.75 LT": 12500,
       "1 LT": 5600,
       "20 LT": 42500,
       "500 ML": 3200,
@@ -2843,15 +2843,15 @@ export const catalogProducts: Product[] = [
     "brandId": "br4",
     "sizes": [
       "2 LT",
-      "3",
+      "3.75 LT",
       "1 LT",
       "20 LT",
       "500 ML",
       "300 ML"
     ],
     "priceBySize": {
-      "3": 12500,
       "2 LT": 9200,
+      "3.75 LT": 12500,
       "1 LT": 5600,
       "20 LT": 42500,
       "500 ML": 3200,
@@ -2901,11 +2901,11 @@ export const catalogProducts: Product[] = [
     "sold": 368,
     "brandId": "br2",
     "sizes": [
-      "3",
+      "3.75 LT",
       "20 LT"
     ],
     "priceBySize": {
-      "3": 10500,
+      "3.75 LT": 10500,
       "20 LT": 42500
     },
     "aromas": [
@@ -2928,11 +2928,11 @@ export const catalogProducts: Product[] = [
     "sold": 405,
     "brandId": "br2",
     "sizes": [
-      "3",
+      "3.75 LT",
       "20 LT"
     ],
     "priceBySize": {
-      "3": 10500,
+      "3.75 LT": 10500,
       "20 LT": 42500
     },
     "aromas": [
@@ -3029,10 +3029,10 @@ export const catalogProducts: Product[] = [
     "sold": 288,
     "brandId": "br2",
     "sizes": [
-      "75 LT"
+      "3.75 LT"
     ],
     "priceBySize": {
-      "75 LT": 29500
+      "3.75 LT": 29500
     },
     "aromas": [
       "CHICLE CR"
@@ -3055,10 +3055,10 @@ export const catalogProducts: Product[] = [
     "sold": 362,
     "brandId": "br2",
     "sizes": [
-      "75 LT"
+      "3.75 LT"
     ],
     "priceBySize": {
-      "75 LT": 29500
+      "3.75 LT": 29500
     },
     "aromas": [
       "ONE MILLON VQ"
@@ -3082,12 +3082,12 @@ export const catalogProducts: Product[] = [
     "sizes": [
       "810 ML",
       "20 LT",
-      "3"
+      "3.75 LT"
     ],
     "priceBySize": {
-      "3": 53000,
       "810 ML": 11900,
-      "20 LT": 245000
+      "20 LT": 245000,
+      "3.75 LT": 53000
     },
     "aromas": [
       "ROJO"
@@ -3110,10 +3110,10 @@ export const catalogProducts: Product[] = [
     "sold": 60,
     "brandId": "br1",
     "sizes": [
-      "SACHET 75 ML"
+      "75 ML (Sachet)"
     ],
     "priceBySize": {
-      "SACHET 75 ML": 39000
+      "75 ML (Sachet)": 39000
     },
     "description": "Desengrasante Industrial con calidad garantizada de FANTASIA. Ideal para uso institucional y del hogar."
   },
@@ -3133,12 +3133,12 @@ export const catalogProducts: Product[] = [
     "brandId": "br1",
     "sizes": [
       "810 ML",
-      "3",
+      "3.75 LT",
       "20 LT"
     ],
     "priceBySize": {
-      "3": 66000,
       "810 ML": 15000,
+      "3.75 LT": 66000,
       "20 LT": 3950
     },
     "aromas": [
@@ -3294,13 +3294,13 @@ export const catalogProducts: Product[] = [
     "sizes": [
       "500 ML",
       "810 ML",
-      "3",
+      "3.75 LT",
       "20 LT"
     ],
     "priceBySize": {
-      "3": 23205,
       "500 ML": 3500,
       "810 ML": 6800,
+      "3.75 LT": 23205,
       "20 LT": 116025
     },
     "description": "Biovarsol Good Morning con calidad garantizada de GOOD MORNING. Ideal para uso institucional y del hogar."
@@ -3343,10 +3343,10 @@ export const catalogProducts: Product[] = [
     "sold": 480,
     "brandId": "br2",
     "sizes": [
-      "Unidad"
+      "Copa Ref 500"
     ],
     "priceBySize": {
-      "Unidad": 4400
+      "Copa Ref 500": 4400
     },
     "description": "Repuesto Trapero Copa Ref 500 con calidad garantizada de GOOD MORNING. Ideal para uso institucional y del hogar."
   },
@@ -3365,10 +3365,10 @@ export const catalogProducts: Product[] = [
     "sold": 67,
     "brandId": "br2",
     "sizes": [
-      "Unidad"
+      "Copa Ref 800"
     ],
     "priceBySize": {
-      "Unidad": 5000
+      "Copa Ref 800": 5000
     },
     "description": "Repuesto Trapero Copa Ref 800 con calidad garantizada de GOOD MORNING. Ideal para uso institucional y del hogar."
   },
@@ -3388,10 +3388,10 @@ export const catalogProducts: Product[] = [
     "sold": 104,
     "brandId": "br2",
     "sizes": [
-      "Unidad"
+      "Copa Ref 1000"
     ],
     "priceBySize": {
-      "Unidad": 6000
+      "Copa Ref 1000": 6000
     },
     "description": "Repuesto Trapero Copa Ref 1000 con calidad garantizada de GOOD MORNING. Ideal para uso institucional y del hogar."
   },
@@ -3434,13 +3434,13 @@ export const catalogProducts: Product[] = [
     "sizes": [
       "500 ML",
       "1 LT",
-      "3",
+      "3.75 LT",
       "20 LT"
     ],
     "priceBySize": {
-      "3": 10500,
       "500 ML": 2350,
       "1 LT": 4500,
+      "3.75 LT": 10500,
       "20 LT": 43500
     },
     "aromas": [
@@ -3463,10 +3463,10 @@ export const catalogProducts: Product[] = [
     "sold": 166,
     "brandId": "br2",
     "sizes": [
-      "250 MT"
+      "250 MTS"
     ],
     "priceBySize": {
-      "250 MT": 28000
+      "250 MTS": 28000
     },
     "description": "Papel Higienico 250 Mts Good Morning 4 Rollos con calidad garantizada de GOOD MORNING. Ideal para uso institucional y del hogar."
   },
@@ -3532,11 +3532,11 @@ export const catalogProducts: Product[] = [
     "sold": 351,
     "brandId": "br4",
     "sizes": [
-      "3",
+      "3.75 LT",
       "20 LT"
     ],
     "priceBySize": {
-      "3": 30500,
+      "3.75 LT": 30500,
       "20 LT": 146000
     },
     "description": "Alcohol Etilico 96% Power Andina con calidad garantizada de WIND. Ideal para uso institucional y del hogar."
@@ -3556,9 +3556,9 @@ export const catalogProducts: Product[] = [
     "sold": 462,
     "brandId": "br4",
     "sizes": [
-      "3",
+      "3.75 LT",
       "20 LT",
-      "1 LT ATM",
+      "1 LT",
       "500 ML"
     ],
     "priceBySize": {
@@ -3583,8 +3583,8 @@ export const catalogProducts: Product[] = [
     "brandId": "br4",
     "sizes": [
       "20 LT",
-      "1 LT ATM",
-      "750 ML ATM",
+      "1 LT",
+      "750 ML",
       "500 ML"
     ],
     "description": "Alcohol Antiseptico Wind 70% con calidad garantizada de WIND. Ideal para uso institucional y del hogar."
@@ -3604,7 +3604,7 @@ export const catalogProducts: Product[] = [
     "sold": 123,
     "brandId": "br4",
     "sizes": [
-      "3"
+      "3.75 LT"
     ],
     "description": "Alcohol Antiseptico Wind 70 % con calidad garantizada de WIND. Ideal para uso institucional y del hogar."
   },
@@ -3623,7 +3623,7 @@ export const catalogProducts: Product[] = [
     "sold": 308,
     "brandId": "br4",
     "sizes": [
-      "120 ML SPRAY"
+      "120 ML"
     ],
     "description": "Alcohol Glicerinado Wind 70% con calidad garantizada de WIND. Ideal para uso institucional y del hogar."
   },
@@ -3862,10 +3862,10 @@ export const catalogProducts: Product[] = [
     "sold": 111,
     "brandId": "br1",
     "sizes": [
-      "Unidad"
+      "Copa Ref 1200"
     ],
     "priceBySize": {
-      "Unidad": 1
+      "Copa Ref 1200": 1
     },
     "description": "Trapero Con Palo Copa Ref 1200 con calidad garantizada de FANTASIA. Ideal para uso institucional y del hogar."
   },
@@ -3884,10 +3884,10 @@ export const catalogProducts: Product[] = [
     "sold": 148,
     "brandId": "br1",
     "sizes": [
-      "Unidad"
+      "Copa Ref 1500"
     ],
     "priceBySize": {
-      "Unidad": 1
+      "Copa Ref 1500": 1
     },
     "description": "Trapero Con Palo Copa Ref 1500 (jumbo) con calidad garantizada de FANTASIA. Ideal para uso institucional y del hogar."
   },
@@ -3907,10 +3907,10 @@ export const catalogProducts: Product[] = [
     "sold": 185,
     "brandId": "br1",
     "sizes": [
-      "Unidad"
+      "Copa Ref 1200"
     ],
     "priceBySize": {
-      "Unidad": 1
+      "Copa Ref 1200": 1
     },
     "description": "Repuesto Trapero Copa Ref 1200 con calidad garantizada de FANTASIA. Ideal para uso institucional y del hogar."
   },
@@ -3929,10 +3929,10 @@ export const catalogProducts: Product[] = [
     "sold": 222,
     "brandId": "br1",
     "sizes": [
-      "Unidad"
+      "Copa Ref 1500"
     ],
     "priceBySize": {
-      "Unidad": 1
+      "Copa Ref 1500": 1
     },
     "description": "Repuesto Trapero Copa Ref 1500 (jumbo) con calidad garantizada de FANTASIA. Ideal para uso institucional y del hogar."
   },
@@ -3953,11 +3953,11 @@ export const catalogProducts: Product[] = [
     "brandId": "br2",
     "sizes": [
       "2 LT",
-      "3"
+      "3.75 LT"
     ],
     "priceBySize": {
-      "3": 8000,
-      "2 LT": 4050
+      "2 LT": 4050,
+      "3.75 LT": 8000
     },
     "aromas": [
       "LAVANDA"
@@ -4064,10 +4064,10 @@ export const catalogProducts: Product[] = [
     "rating": 4.7,
     "sold": 481,
     "sizes": [
-      "10LT"
+      "10 LT"
     ],
     "priceBySize": {
-      "10LT": 8500
+      "10 LT": 8500
     },
     "description": "Balde Plastico 10lt con calidad garantizada de N/D. Ideal para uso institucional y del hogar."
   },
@@ -4702,12 +4702,10 @@ export const catalogProducts: Product[] = [
     "rating": 4.4,
     "sold": 204,
     "sizes": [
-      "Unidad",
-      "4"
+      "Unidad"
     ],
     "priceBySize": {
-      "4": 14000,
-      "Unidad": 4000
+      "Unidad": 14000
     },
     "description": "Esponja Acerada con calidad garantizada de EBRAND. Ideal para uso institucional y del hogar."
   },
@@ -4942,12 +4940,10 @@ export const catalogProducts: Product[] = [
     "rating": 4.8,
     "sold": 198,
     "sizes": [
-      "3",
-      "5"
+      "Unidad"
     ],
     "priceBySize": {
-      "3": 23000,
-      "5": 31000
+      "Unidad": 31000
     },
     "description": "Guarda Escobas con calidad garantizada de LIAO. Ideal para uso institucional y del hogar."
   },
@@ -5189,10 +5185,10 @@ export const catalogProducts: Product[] = [
     "rating": 4.4,
     "sold": 192,
     "sizes": [
-      "1MT"
+      "1 MT"
     ],
     "priceBySize": {
-      "1MT": 70000
+      "1 MT": 70000
     },
     "description": "Mopa Algodon Completa 1mt con calidad garantizada de N/D. Ideal para uso institucional y del hogar."
   },
@@ -5210,10 +5206,10 @@ export const catalogProducts: Product[] = [
     "rating": 4.5,
     "sold": 229,
     "sizes": [
-      "60CM"
+      "60 CM"
     ],
     "priceBySize": {
-      "60CM": 58000
+      "60 CM": 58000
     },
     "description": "Mopa Algodon Completa 60cm con calidad garantizada de N/D. Ideal para uso institucional y del hogar."
   },
@@ -5445,10 +5441,10 @@ export const catalogProducts: Product[] = [
     "rating": 4.8,
     "sold": 186,
     "sizes": [
-      "Unidad"
+      "Paca x 30"
     ],
     "priceBySize": {
-      "Unidad": 60000
+      "Paca x 30": 60000
     },
     "description": "Papel Scott Paca X 30 con calidad garantizada de SCOTT. Ideal para uso institucional y del hogar."
   },
@@ -5787,10 +5783,10 @@ export const catalogProducts: Product[] = [
     "rating": 4.8,
     "sold": 328,
     "sizes": [
-      "5OZ"
+      "5 OZ"
     ],
     "priceBySize": {
-      "5OZ": 5500
+      "5 OZ": 5500
     },
     "description": "Vasos Carton 5oz con calidad garantizada de CHAMPION. Ideal para uso institucional y del hogar."
   },
@@ -5809,10 +5805,10 @@ export const catalogProducts: Product[] = [
     "rating": 4.9,
     "sold": 365,
     "sizes": [
-      "6OZ"
+      "6 OZ"
     ],
     "priceBySize": {
-      "6OZ": 6000
+      "6 OZ": 6000
     },
     "description": "Vasos Carton 6oz con calidad garantizada de CHAMPION. Ideal para uso institucional y del hogar."
   },
@@ -5830,10 +5826,10 @@ export const catalogProducts: Product[] = [
     "rating": 4.2,
     "sold": 402,
     "sizes": [
-      "7OZ"
+      "7 OZ"
     ],
     "priceBySize": {
-      "7OZ": 7500
+      "7 OZ": 7500
     },
     "description": "Vasos Carton 7oz con calidad garantizada de CHAMPION. Ideal para uso institucional y del hogar."
   },
@@ -5851,10 +5847,10 @@ export const catalogProducts: Product[] = [
     "rating": 4.3,
     "sold": 439,
     "sizes": [
-      "5OZ"
+      "5 OZ"
     ],
     "priceBySize": {
-      "5OZ": 2600
+      "5 OZ": 2600
     },
     "aromas": [
       "BLANCO"
@@ -5876,10 +5872,10 @@ export const catalogProducts: Product[] = [
     "rating": 4.4,
     "sold": 476,
     "sizes": [
-      "7OZ"
+      "7 OZ"
     ],
     "priceBySize": {
-      "7OZ": 3000
+      "7 OZ": 3000
     },
     "description": "Vasos Desechables 7oz con calidad garantizada de CHAMPION. Ideal para uso institucional y del hogar."
   },
@@ -6497,10 +6493,10 @@ export const catalogProducts: Product[] = [
     "rating": 4.2,
     "sold": 236,
     "sizes": [
-      "Unidad"
+      "Pack x 4 Rollos"
     ],
     "priceBySize": {
-      "Unidad": 54000
+      "Pack x 4 Rollos": 54000
     },
     "description": "Papel Elite X 4 Rollos con calidad garantizada de ELITE. Ideal para uso institucional y del hogar."
   },
